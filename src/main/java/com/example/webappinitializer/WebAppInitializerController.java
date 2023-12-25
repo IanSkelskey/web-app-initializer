@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WebAppInitializerController {
 
@@ -73,10 +75,21 @@ public class WebAppInitializerController {
                 ProjectInitializer.removeCommentsFromPublicIndex(appDirectory);
                 ProjectInitializer.updateReadme(appDirectory, appName, description);
                 if (installTailwind) {
-                    ProjectInitializer.installTailwind(new File(selectedDirectory, appName));
+                    ProjectInitializer.installTailwind(appDirectory);
                 }
                 if (installPrettier) {
-                    ProjectInitializer.installPrettier(new File(selectedDirectory, appName));
+                    ProjectInitializer.installPrettier(appDirectory);
+                    Map<String, Object> prettierConfig = new HashMap<>();
+                    prettierConfig.put("semi", prettierSemiCheckBox.isSelected());
+                    prettierConfig.put("singleQuote", prettierSingleQuoteCheckBox.isSelected());
+                    prettierConfig.put("trailingComma", prettierTrailingCommaCheckBox.isSelected());
+                    prettierConfig.put("tabWidth", prettierTabWidthSpinner.getValue());
+                    prettierConfig.put("printWidth", prettierPrintWidthSpinner.getValue());
+                    prettierConfig.put("bracketSpacing", prettierBracketSpacingCheckBox.isSelected());
+                    prettierConfig.put("jsxBracketSameLine", prettierJSXBracketsCheckBox.isSelected());
+                    prettierConfig.put("endOfLine", prettierEOLComboBox.getValue());
+                    ProjectInitializer.configurePrettier(appDirectory, prettierConfig);
+                    ProjectInitializer.runPrettier(appDirectory);
                 }
                 return null;
             }

@@ -6,6 +6,7 @@ import javafx.stage.DirectoryChooser;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -35,6 +36,24 @@ public class ProjectInitializer {
         Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter(packageJson)) {
             prettyGson.toJson(packageJsonObject, writer);
+        }
+    }
+
+    public static void updateManifestJsonName(File appDirectory, String shortName, String name) throws IOException {
+        File manifestJson = new File(appDirectory, "public/manifest.json");
+
+        Gson gson = new Gson();
+        JsonObject manifestJsonObject;
+        try (FileReader reader = new FileReader(manifestJson)) {
+            manifestJsonObject = gson.fromJson(reader, JsonObject.class);
+        }
+
+        manifestJsonObject.addProperty("short_name", shortName);
+        manifestJsonObject.addProperty("name", name);
+
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter(manifestJson)) {
+            prettyGson.toJson(manifestJsonObject, writer);
         }
 
     }
@@ -122,6 +141,18 @@ public class ProjectInitializer {
 
     public static void installPrettier(File appDirectory) throws IOException, InterruptedException {
         runProcess(appDirectory, "npm", "install", "--save-dev", "prettier");
+    }
+
+    public static void configurePrettier(File appDirectory, Map<String, Object> options) throws IOException {
+        File prettierConfig = new File(appDirectory, ".prettierrc");
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter(prettierConfig)) {
+            gson.toJson(options, writer);
+        }
+    }
+
+    public static void runPrettier(File appDirectory) throws IOException, InterruptedException {
+        runProcess(appDirectory, "npx", "prettier", "--write", ".");
     }
 
     private static void updateIndexCss(File appDirectory) throws FileNotFoundException {
