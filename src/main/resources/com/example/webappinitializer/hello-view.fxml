@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Button?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.webappinitializer.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+    <!-- Title -->
+    <Label text="Web App Initializer" styleClass="panel-title"/>
+
+    <!-- App Name Input -->
+    <Label text="App Name:"/>
+    <TextField fx:id="appNameTextField" promptText="Enter App Name" styleClass="form-control"/>
+
+    <!-- Modules to Install -->
+    <Label text="Select Modules to Install:"/>
+    <VBox spacing="5.0">
+        <CheckBox fx:id="prettierCheckBox" text="Prettier" styleClass="checkbox"/>
+        <CheckBox fx:id="tailwindCssCheckBox" text="Tailwind CSS" styleClass="checkbox"/>
+        <CheckBox fx:id="framerMotionCheckBox" text="Framer Motion" styleClass="checkbox"/>
+    </VBox>
+
+    <!-- Submit Button -->
+    <Button text="Create App" onAction="#onCreateAppButtonClick" styleClass="btn-primary"/>
 </VBox>
