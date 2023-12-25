@@ -28,11 +28,14 @@ public class ProjectInitializer {
     }
 
     private static void runProcess(File directory, String... commands) throws IOException, InterruptedException {
-        ProcessBuilder builder = new ProcessBuilder(commands);
+        ProcessBuilder builder = new ProcessBuilder("cmd", "/c", String.join(" ", commands));
         builder.directory(directory);
+        builder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+        builder.redirectError(ProcessBuilder.Redirect.INHERIT);
         Process process = builder.start();
         process.waitFor();
     }
+
 
     public static File selectDirectory() {
         DirectoryChooser directoryChooser = new DirectoryChooser();

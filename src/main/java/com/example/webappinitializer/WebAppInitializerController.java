@@ -22,15 +22,26 @@ public class WebAppInitializerController {
         String appName = appNameTextField.getText();
 
         File selectedDirectory = ProjectInitializer.selectDirectory();
+        if (selectedDirectory == null) {
+            return;
+        }
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                if (selectedDirectory != null) {
-                    ProjectInitializer.createReactApp(appName, selectedDirectory);
-                }
+                System.out.println("Directory selected: " + selectedDirectory.getAbsolutePath());
+                ProjectInitializer.createReactApp(appName, selectedDirectory);
                 return null;
             }
         };
+
+        task.setOnSucceeded(event -> {
+            System.out.println("React app created successfully");
+        });
+
+        task.setOnFailed(event -> {
+            Throwable exception = task.getException();
+            System.out.println("Failed to create React app: " + exception.getMessage());
+        });
 
         new Thread(task).start();
     }

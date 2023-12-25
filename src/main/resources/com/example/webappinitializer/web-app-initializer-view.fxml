@@ -25,7 +25,7 @@
 
     <!-- App Description Input -->
     <Label text="App Description:"/>
-    <TextField fx:id="appDescriptionTextField" promptText="Enter App Description" styleClass="form-control"/>
+    <TextArea fx:id="appDescriptionTextField" promptText="Enter App Description" styleClass="form-control"/>
 
     <!-- Modules to Install -->
     <Label text="Select Modules to Install:"/>
