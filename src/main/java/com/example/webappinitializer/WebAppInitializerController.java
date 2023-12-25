@@ -1,5 +1,7 @@
 package com.example.webappinitializer;
 
+import com.example.webappinitializer.util.ProjectInitializer;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -20,23 +22,21 @@ public class WebAppInitializerController {
         String appName = appNameTextField.getText();
         boolean installTailwind = tailwindCssCheckBox.isSelected();
 
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Select a folder to create your app");
-        File selectedDirectory = directoryChooser.showDialog(null);
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                System.out.println("Creating React app...");
+                File selectedDirectory = ProjectInitializer.selectDirectory();
+                if (selectedDirectory != null) {
+                    ProjectInitializer.createReactApp(appName, selectedDirectory);
+                    if (installTailwind) {
+                        ProjectInitializer.installTailwind(new File(selectedDirectory, appName));
+                    }
+                }
+                return null;
+            }
+        };
 
-        if (selectedDirectory != null) {
-            createReactApp(selectedDirectory, appName);
-        }
-
-    }
-
-    private void createReactApp(File directory, String appName) {
-        try {
-            ProcessBuilder builder = new ProcessBuilder("cmd", "/c", "npx create-react-app " + appName);
-            builder.directory(directory);
-            Process process = builder.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        new Thread(task).start();
     }
 }

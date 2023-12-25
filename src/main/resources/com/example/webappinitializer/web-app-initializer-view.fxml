@@ -16,8 +16,8 @@
         <graphic>
             <FontIcon iconLiteral="di-react"/>
         </graphic>
+        React App Helper
     </Label>
-    <Label styleClass="h1">React App Helper</Label>
 
     <!-- App Name Input -->
     <Label text="App Name:"/>
