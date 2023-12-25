@@ -29,12 +29,14 @@ public class WebAppInitializerController {
     public ArrayList<VBox> steps = new ArrayList<>();
 
     public int currentStep = 0;
+    public VBox prettierConfigContainer;
 
     @FXML
     protected void initialize() {
         steps.add(step0Container);
         steps.add(step1Container);
         steps.add(step2Container);
+        steps.add(prettierConfigContainer);
     }
 
     @FXML
@@ -62,6 +64,7 @@ public class WebAppInitializerController {
                 ProjectInitializer.updatePublicIndexDescription(appDirectory, description);
                 ProjectInitializer.updatePublicIndexTitle(appDirectory, appName);
                 ProjectInitializer.removeCommentsFromPublicIndex(appDirectory);
+                ProjectInitializer.updateReadme(appDirectory, appName, description);
                 if (installTailwind) {
                     ProjectInitializer.installTailwind(new File(selectedDirectory, appName));
                 }

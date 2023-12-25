@@ -106,10 +106,24 @@ public class ProjectInitializer {
         }
     }
 
+    public static void updateReadme(File appDirectory, String appName, String appDescription) throws IOException {
+        File readme = new File(appDirectory, "README.md");
+        try (PrintWriter writer = new PrintWriter(readme)) {
+            writer.println("# " + appName);
+            writer.println(appDescription);
+        }
+    }
+
     public static void installTailwind(File appDirectory) throws IOException, InterruptedException {
         runProcess(appDirectory, "npm", "install", "tailwindcss", "postcss", "autoprefixer");
         updateIndexCss(appDirectory);
+        initializeTailwind(appDirectory);
     }
+
+    public static void installPrettier(File appDirectory) throws IOException, InterruptedException {
+        runProcess(appDirectory, "npm", "install", "--save-dev", "prettier");
+    }
+
 
     private static void updateIndexCss(File appDirectory) throws FileNotFoundException {
         File indexCss = new File(appDirectory, "src/index.css");
@@ -118,6 +132,10 @@ public class ProjectInitializer {
             writer.println("@tailwind components;");
             writer.println("@tailwind utilities;");
         }
+    }
+
+    private static void initializeTailwind(File appDirectory) throws IOException, InterruptedException {
+        runProcess(appDirectory, "npx", "tailwindcss", "init");
     }
 
     private static void runProcess(File directory, String... commands) throws IOException, InterruptedException {

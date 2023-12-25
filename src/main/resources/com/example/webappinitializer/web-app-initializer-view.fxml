@@ -3,6 +3,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.webappinitializer.WebAppInitializerController">
     <padding>
@@ -33,14 +35,56 @@
             <VBox fx:id="step2Container" visible="false" alignment="CENTER" spacing="20.0">
                 <Label text="Select Modules" styleClass="h2"/>
                 <Label text="Select the modules you want to install in your app. You will be able to configure these in future steps." wrapText="true"/>
-                <VBox spacing="5.0">
+                <VBox alignment="CENTER" spacing="5.0">
                     <CheckBox fx:id="prettierCheckBox" text="Prettier" styleClass="checkbox"/>
                     <CheckBox fx:id="tailwindCssCheckBox" text="Tailwind CSS" styleClass="checkbox"/>
                     <CheckBox fx:id="framerMotionCheckBox" text="Framer Motion" styleClass="checkbox"/>
                 </VBox>
             </VBox>
 
-            <!-- Additional steps can be added here -->
+            <!-- Step 3: Configure Modules -->
+            <VBox fx:id="tailWindConfigContainer" visible="false" alignment="CENTER" spacing="20.0">
+                <Label text="Configure Tailwind CSS" styleClass="h2"/>
+                <Label text="Tailwind CSS is a utility-first CSS framework. You can configure it to suit your needs." wrapText="true"/>
+                <Label text="Tailwind CSS Configuration:"/>
+                <TextArea fx:id="tailwindConfigTextArea" promptText="Enter Tailwind CSS Configuration" styleClass="form-control"/>
+            </VBox>
+
+            <VBox fx:id="prettierConfigContainer" visible="false" alignment="CENTER" spacing="20.0">
+                <Label text="Configure Prettier" styleClass="h2"/>
+                <Label text="Prettier is an opinionated code formatter. You can configure it to suit your needs." wrapText="true"/>
+                <Label text="Prettier Configuration:"/>
+
+                <VBox alignment="CENTER" spacing="5.0">
+                    <CheckBox fx:id="prettierSemiCheckBox" text="Semicolons" styleClass="checkbox"/>
+                    <CheckBox fx:id="prettierSingleQuoteCheckBox" text="Single Quotes" styleClass="checkbox"/>
+                    <CheckBox fx:id="prettierTrailingCommaCheckBox" text="Trailing Commas" styleClass="checkbox"/>
+                    <HBox alignment="CENTER">
+                        <Label text="Tab Width:"/>
+                        <Spinner fx:id="prettierTabWidthSpinner" min="2" max="8" initialValue="2"/>
+                    </HBox>
+                    <HBox alignment="CENTER">
+                        <Label text="Print Width:"/>
+                        <Spinner fx:id="prettierPrintWidthSpinner" min="80" max="120" initialValue="80"/>
+                    </HBox>
+                    <CheckBox fx:id="prettierBracketSpacingCheckBox" text="Bracket Spacing" styleClass="checkbox"/>
+                    <CheckBox fx:id="prettierJSXBracketsCheckBox" text="JSX Brackets" styleClass="checkbox"/>
+                    <HBox alignment="CENTER">
+                        <Label text="End of Line:"/>
+                        <ComboBox fx:id="prettierEOLComboBox" value="Auto">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Auto"/>
+                                    <String fx:value="LF"/>
+                                    <String fx:value="CRLF"/>
+                                    <String fx:value="CR"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </HBox>
+                </VBox>
+            </VBox>
+
         </StackPane>
     </center>
     <bottom>
