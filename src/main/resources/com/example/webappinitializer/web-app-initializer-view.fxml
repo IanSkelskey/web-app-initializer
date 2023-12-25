@@ -5,7 +5,7 @@
 <?import javafx.geometry.Insets?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.webappinitializer.HelloController">
+      fx:controller="com.example.webappinitializer.WebAppInitializerController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
@@ -16,6 +16,10 @@
     <!-- App Name Input -->
     <Label text="App Name:"/>
     <TextField fx:id="appNameTextField" promptText="Enter App Name" styleClass="form-control"/>
+
+    <!-- App Description Input -->
+    <Label text="App Description:"/>
+    <TextField fx:id="appDescriptionTextField" promptText="Enter App Description" styleClass="form-control"/>
 
     <!-- Modules to Install -->
     <Label text="Select Modules to Install:"/>
