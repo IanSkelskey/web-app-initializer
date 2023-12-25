@@ -20,18 +20,13 @@ public class WebAppInitializerController {
     @FXML
     protected void onCreateAppButtonClick() {
         String appName = appNameTextField.getText();
-        boolean installTailwind = tailwindCssCheckBox.isSelected();
 
+        File selectedDirectory = ProjectInitializer.selectDirectory();
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                System.out.println("Creating React app...");
-                File selectedDirectory = ProjectInitializer.selectDirectory();
                 if (selectedDirectory != null) {
                     ProjectInitializer.createReactApp(appName, selectedDirectory);
-                    if (installTailwind) {
-                        ProjectInitializer.installTailwind(new File(selectedDirectory, appName));
-                    }
                 }
                 return null;
             }

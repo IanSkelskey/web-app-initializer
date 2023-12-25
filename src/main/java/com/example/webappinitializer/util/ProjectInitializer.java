@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 
 public class ProjectInitializer {
     public static void createReactApp(String appName, File directory) throws IOException, InterruptedException {
+        System.out.println("Creating React app...");
         runProcess(directory, "npx", "create-react-app", appName);
     }
 
