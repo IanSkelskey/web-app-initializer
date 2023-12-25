@@ -39,6 +39,4 @@ public class WebAppInitializerController {
             e.printStackTrace();
         }
     }
-
-    private void installTailwindCSS(
 }
