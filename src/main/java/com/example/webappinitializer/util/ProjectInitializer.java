@@ -4,9 +4,17 @@ import com.google.gson.GsonBuilder;
 import javafx.stage.DirectoryChooser;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Comment;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.select.NodeVisitor;
 
 public class ProjectInitializer {
     public static void createReactApp(String appName, File directory) throws IOException, InterruptedException {
@@ -31,52 +39,79 @@ public class ProjectInitializer {
 
     }
 
-    public static void updatePublicIndexDescription(File appDirectory, String description) throws IOException {
+    public static void updatePublicIndexTitle(File appDirectory, String title) throws IOException {
         File indexHtml = new File(appDirectory, "public/index.html");
-        StringBuilder builder = new StringBuilder();
-        String newMetaTag = "<meta name=\"description\" content=\"" + description + "\">";
-        boolean insideMetaTag = false;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(indexHtml))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.trim().startsWith("<meta")) {
-                    insideMetaTag = true;
-                    continue;
-                }
-                if (insideMetaTag) {
-                    if (line.contains(">")) {
-                        insideMetaTag = false;
-                        builder.append(newMetaTag).append("\n");
-                    }
-                    continue;
-                }
-                builder.append(line).append("\n");
-            }
+        Document doc = Jsoup.parse(indexHtml, "UTF-8");
+        Element titleTag = doc.selectFirst("title");
+
+        if (titleTag != null) {
+            // Update the existing title tag
+            titleTag.text(title);
+        } else {
+            // Create and append a new title tag
+            titleTag = doc.createElement("title");
+            titleTag.text(title);
+            doc.head().appendChild(titleTag);
         }
 
-        try (PrintWriter writer = new PrintWriter(indexHtml)) {
-            writer.print(builder);
+        // Write the updated document back to file
+        try (FileWriter writer = new FileWriter(indexHtml)) {
+            writer.write(doc.toString());
+        }
+    }
+
+    public static void updatePublicIndexDescription(File appDirectory, String description) throws IOException {
+        File indexHtml = new File(appDirectory, "public/index.html");
+
+        Document doc = Jsoup.parse(indexHtml, "UTF-8");
+        Element metaTag = doc.selectFirst("meta[name=description]");
+
+        if (metaTag != null) {
+            // Update the existing meta tag
+            metaTag.attr("content", description);
+        } else {
+            // Create and append a new meta tag
+            metaTag = doc.createElement("meta");
+            metaTag.attr("name", "description");
+            metaTag.attr("content", description);
+            doc.head().appendChild(metaTag);
+        }
+
+        // Write the updated document back to file
+        try (FileWriter writer = new FileWriter(indexHtml)) {
+            writer.write(doc.toString());
         }
     }
 
     public static void removeCommentsFromPublicIndex(File appDirectory) throws IOException {
         File indexHtml = new File(appDirectory, "public/index.html");
-        try (BufferedReader reader = new BufferedReader(new FileReader(indexHtml))) {
-            String line;
-            StringBuilder builder = new StringBuilder();
-            while ((line = reader.readLine()) != null) {
-                if (line.contains("<!--")) {
-                    line = line.replace("<!--", "");
+        Document doc = Jsoup.parse(indexHtml, "UTF-8");
+        List<Node> toRemove = new ArrayList<>();
+
+        // Collect all comment nodes
+        doc.traverse(new NodeVisitor() {
+            @Override
+            public void head(Node node, int i) {
+                if (node instanceof Comment) {
+                    toRemove.add(node);
                 }
-                if (line.contains("-->")) {
-                    line = line.replace("-->", "");
-                }
-                builder.append(line).append("\n");
             }
-            try (PrintWriter writer = new PrintWriter(indexHtml)) {
-                writer.println(builder);
+
+            @Override
+            public void tail(Node node, int i) {
+
             }
+        });
+
+        // Remove collected comment nodes
+        for (Node node : toRemove) {
+            node.remove();
+        }
+
+        // Write the updated document back to file
+        try (FileWriter writer = new FileWriter(indexHtml)) {
+            writer.write(doc.toString());
         }
     }
 

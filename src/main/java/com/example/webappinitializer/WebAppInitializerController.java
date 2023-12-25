@@ -35,6 +35,7 @@ public class WebAppInitializerController {
                 ProjectInitializer.createReactApp(appName, selectedDirectory);
                 ProjectInitializer.updatePackageJsonDescription(appDirectory, description);
                 ProjectInitializer.updatePublicIndexDescription(appDirectory, description);
+                ProjectInitializer.updatePublicIndexTitle(appDirectory, appName);
                 ProjectInitializer.removeCommentsFromPublicIndex(appDirectory);
                 if (installTailwind) {
                     ProjectInitializer.installTailwind(new File(selectedDirectory, appName));
