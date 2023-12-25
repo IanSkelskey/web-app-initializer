@@ -46,16 +46,13 @@ public class ProjectInitializer {
         Element titleTag = doc.selectFirst("title");
 
         if (titleTag != null) {
-            // Update the existing title tag
             titleTag.text(title);
         } else {
-            // Create and append a new title tag
             titleTag = doc.createElement("title");
             titleTag.text(title);
             doc.head().appendChild(titleTag);
         }
 
-        // Write the updated document back to file
         try (FileWriter writer = new FileWriter(indexHtml)) {
             writer.write(doc.toString());
         }
@@ -68,17 +65,14 @@ public class ProjectInitializer {
         Element metaTag = doc.selectFirst("meta[name=description]");
 
         if (metaTag != null) {
-            // Update the existing meta tag
             metaTag.attr("content", description);
         } else {
-            // Create and append a new meta tag
             metaTag = doc.createElement("meta");
             metaTag.attr("name", "description");
             metaTag.attr("content", description);
             doc.head().appendChild(metaTag);
         }
 
-        // Write the updated document back to file
         try (FileWriter writer = new FileWriter(indexHtml)) {
             writer.write(doc.toString());
         }
@@ -89,7 +83,6 @@ public class ProjectInitializer {
         Document doc = Jsoup.parse(indexHtml, "UTF-8");
         List<Node> toRemove = new ArrayList<>();
 
-        // Collect all comment nodes
         doc.traverse(new NodeVisitor() {
             @Override
             public void head(Node node, int i) {
@@ -104,12 +97,10 @@ public class ProjectInitializer {
             }
         });
 
-        // Remove collected comment nodes
         for (Node node : toRemove) {
             node.remove();
         }
 
-        // Write the updated document back to file
         try (FileWriter writer = new FileWriter(indexHtml)) {
             writer.write(doc.toString());
         }
