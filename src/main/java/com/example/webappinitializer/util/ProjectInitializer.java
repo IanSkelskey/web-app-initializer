@@ -143,6 +143,10 @@ public class ProjectInitializer {
         runProcess(appDirectory, "npm", "install", "--save-dev", "prettier");
     }
 
+    public static void installFramerMotion(File appDirectory) throws IOException, InterruptedException {
+        runProcess(appDirectory, "npm", "install", "framer-motion");
+    }
+
     public static void configurePrettier(File appDirectory, Map<String, Object> options) throws IOException {
         File prettierConfig = new File(appDirectory, ".prettierrc");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

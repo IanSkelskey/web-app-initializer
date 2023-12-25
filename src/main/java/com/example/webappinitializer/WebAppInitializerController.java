@@ -28,16 +28,25 @@ public class WebAppInitializerController {
     public ArrayList<VBox> steps = new ArrayList<>();
 
     public int currentStep = 0;
+
+    @FXML
     public VBox prettierConfigContainer;
-    public CheckBox prettierSemiCheckBox;
-    public CheckBox prettierSingleQuoteCheckBox;
-    public CheckBox prettierTrailingCommaCheckBox;
-    public Spinner prettierTabWidthSpinner;
-    public Spinner prettierPrintWidthSpinner;
-    public CheckBox prettierBracketSpacingCheckBox;
-    public CheckBox prettierJSXBracketsCheckBox;
-    public ComboBox prettierEOLComboBox;
+
+    @FXML
+    private CheckBox prettierCheckBox, tailwindCssCheckBox, framerMotionCheckBox, prettierSemiCheckBox, prettierSingleQuoteCheckBox, prettierBracketSpacingCheckBox;
+
+    @FXML
+    public Spinner prettierTabWidthSpinner, prettierPrintWidthSpinner;
+
+    @FXML
+    public ComboBox prettierEOLComboBox, prettierTrailingCommaComboBox;
+
     public Button getStartedButton;
+    public TextField appShortNameTextField;
+    public TextField appFullNameTextField;
+    public Label directoryNameLabel;
+    public Label prettierConfigPreview;
+
 
     @FXML
     protected void initialize() {
@@ -45,35 +54,59 @@ public class WebAppInitializerController {
         steps.add(step1Container);
         steps.add(step2Container);
         getStartedButton.getStyleClass().addAll("btn-lg", "btn-primary");
+        createAppButton.getStyleClass().addAll("btn-lg", "btn-primary");
+
+        appShortNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            directoryNameLabel.setText(newValue.toLowerCase().replaceAll("\\s+", "-"));
+        });
+
+        prettierTabWidthSpinner.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+            handlePrettierConfigChange(null);
+        });
+
+        prettierPrintWidthSpinner.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+            handlePrettierConfigChange(null);
+        });
+
+        handlePrettierConfigChange(null);
     }
 
     @FXML
-    private TextField appNameTextField;
-
-    @FXML
-    private CheckBox prettierCheckBox, tailwindCssCheckBox, framerMotionCheckBox;
-
-    @FXML
     protected void onCreateAppButtonClick() {
-        String appName = appNameTextField.getText();
+        String directoryName = directoryNameLabel.getText();
+        String shortName = appShortNameTextField.getText();
+        String fullName = appFullNameTextField.getText();
+
         String description = appDescriptionTextField.getText();
         boolean installTailwind = tailwindCssCheckBox.isSelected();
         boolean installPrettier = prettierCheckBox.isSelected();
+        boolean installFramerMotion = framerMotionCheckBox.isSelected();
 
         File selectedDirectory = ProjectInitializer.selectDirectory();
         if (selectedDirectory == null) {
             return;
         }
+
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Creating Application");
+        alert.setHeaderText(null);
+        alert.setContentText("Please wait...");
+        alert.getDialogPane().setContent(progressBar);
+
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                File appDirectory = new File(selectedDirectory, appName);
-                ProjectInitializer.createReactApp(appName, selectedDirectory);
+                File appDirectory = new File(selectedDirectory, directoryName);
+                ProjectInitializer.createReactApp(directoryName, selectedDirectory);
                 ProjectInitializer.updatePackageJsonDescription(appDirectory, description);
                 ProjectInitializer.updatePublicIndexDescription(appDirectory, description);
-                ProjectInitializer.updatePublicIndexTitle(appDirectory, appName);
+                ProjectInitializer.updatePublicIndexTitle(appDirectory, fullName);
                 ProjectInitializer.removeCommentsFromPublicIndex(appDirectory);
-                ProjectInitializer.updateReadme(appDirectory, appName, description);
+                ProjectInitializer.updateReadme(appDirectory, fullName, description);
+                ProjectInitializer.updateManifestJsonName(appDirectory, shortName, fullName);
                 if (installTailwind) {
                     ProjectInitializer.installTailwind(appDirectory);
                 }
@@ -82,20 +115,23 @@ public class WebAppInitializerController {
                     Map<String, Object> prettierConfig = new HashMap<>();
                     prettierConfig.put("semi", prettierSemiCheckBox.isSelected());
                     prettierConfig.put("singleQuote", prettierSingleQuoteCheckBox.isSelected());
-                    prettierConfig.put("trailingComma", prettierTrailingCommaCheckBox.isSelected());
+                    prettierConfig.put("trailingComma", prettierTrailingCommaComboBox.getValue().toString().toLowerCase());
                     prettierConfig.put("tabWidth", prettierTabWidthSpinner.getValue());
                     prettierConfig.put("printWidth", prettierPrintWidthSpinner.getValue());
                     prettierConfig.put("bracketSpacing", prettierBracketSpacingCheckBox.isSelected());
-                    prettierConfig.put("jsxBracketSameLine", prettierJSXBracketsCheckBox.isSelected());
-                    prettierConfig.put("endOfLine", prettierEOLComboBox.getValue());
+                    prettierConfig.put("endOfLine", prettierEOLComboBox.getValue().toString().toLowerCase());
                     ProjectInitializer.configurePrettier(appDirectory, prettierConfig);
                     ProjectInitializer.runPrettier(appDirectory);
+                }
+                if (installFramerMotion) {
+                    ProjectInitializer.installFramerMotion(appDirectory);
                 }
                 return null;
             }
         };
 
         task.setOnSucceeded(event -> {
+            alert.close();
             System.out.println("React app created successfully");
         });
 
@@ -105,6 +141,7 @@ public class WebAppInitializerController {
         });
 
         new Thread(task).start();
+        alert.showAndWait();
     }
 
     public void handleNextButtonAction(ActionEvent actionEvent) {
@@ -130,8 +167,8 @@ public class WebAppInitializerController {
             currentStep--;
             if (currentStep == 0) {
                 backButton.setVisible(false);
-            }
-            if (currentStep < steps.size() - 1) {
+                nextButton.setVisible(false);
+            } else if (currentStep < steps.size() - 1) {
                 nextButton.setVisible(true);
                 createAppButton.setVisible(false);
             }
@@ -154,6 +191,29 @@ public class WebAppInitializerController {
         if (currentStep < steps.size() - 1) {
             nextButton.setVisible(true);
             createAppButton.setVisible(false);
+        } else {
+            nextButton.setVisible(false);
+            createAppButton.setVisible(true);
         }
+    }
+
+    public void handlePrettierConfigChange(ActionEvent actionEvent) {
+        boolean semi = prettierSemiCheckBox.isSelected();
+        boolean singleQuote = prettierSingleQuoteCheckBox.isSelected();
+        boolean bracketSpacing = prettierBracketSpacingCheckBox.isSelected();
+        String trailingComma = prettierTrailingCommaComboBox.getValue().toString().toLowerCase();
+        int tabWidth = (int) prettierTabWidthSpinner.getValue();
+        int printWidth = (int) prettierPrintWidthSpinner.getValue();
+        String endOfLine = prettierEOLComboBox.getValue().toString().toLowerCase();
+        String preview = "{\n" +
+                "  semi: " + semi + ",\n" +
+                "  singleQuote: " + singleQuote + ",\n" +
+                "  trailingComma: \"" + trailingComma + "\",\n" +
+                "  tabWidth: " + tabWidth + ",\n" +
+                "  printWidth: " + printWidth + ",\n" +
+                "  bracketSpacing: " + bracketSpacing + ",\n" +
+                "  endOfLine: \"" + endOfLine + "\",\n" +
+                "};";
+        prettierConfigPreview.setText(preview);
     }
 }
