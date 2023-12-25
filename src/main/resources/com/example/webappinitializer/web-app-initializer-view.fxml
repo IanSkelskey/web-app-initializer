@@ -36,7 +36,7 @@
                 <Label text="Select Modules" styleClass="h2"/>
                 <Label text="Select the modules you want to install in your app. You will be able to configure these in future steps." wrapText="true"/>
                 <VBox alignment="CENTER" spacing="5.0">
-                    <CheckBox fx:id="prettierCheckBox" text="Prettier" styleClass="checkbox"/>
+                    <CheckBox fx:id="prettierCheckBox" text="Prettier" styleClass="checkbox" onAction="#handlePrettierCheck"/>
                     <CheckBox fx:id="tailwindCssCheckBox" text="Tailwind CSS" styleClass="checkbox"/>
                     <CheckBox fx:id="framerMotionCheckBox" text="Framer Motion" styleClass="checkbox"/>
                 </VBox>

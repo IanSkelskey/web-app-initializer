@@ -36,7 +36,6 @@ public class WebAppInitializerController {
         steps.add(step0Container);
         steps.add(step1Container);
         steps.add(step2Container);
-        steps.add(prettierConfigContainer);
     }
 
     @FXML
@@ -120,5 +119,13 @@ public class WebAppInitializerController {
         step1Container.setVisible(true);
         backButton.setVisible(true);
         nextButton.setVisible(true);
+    }
+
+    public void handlePrettierCheck(ActionEvent actionEvent) {
+        if (prettierCheckBox.isSelected()) {
+            steps.add(prettierConfigContainer);
+        } else {
+            steps.remove(prettierConfigContainer);
+        }
     }
 }
