@@ -33,18 +33,30 @@ public class ProjectInitializer {
 
     public static void updatePublicIndexDescription(File appDirectory, String description) throws IOException {
         File indexHtml = new File(appDirectory, "public/index.html");
+        StringBuilder builder = new StringBuilder();
+        String newMetaTag = "<meta name=\"description\" content=\"" + description + "\">";
+        boolean insideMetaTag = false;
+
         try (BufferedReader reader = new BufferedReader(new FileReader(indexHtml))) {
             String line;
-            StringBuilder builder = new StringBuilder();
             while ((line = reader.readLine()) != null) {
-                if (line.contains("<meta name=\"description\"")) {
-                    line = line.replace("content=\"\"", "content=\"" + description + "\"");
+                if (line.trim().startsWith("<meta")) {
+                    insideMetaTag = true;
+                    continue;
+                }
+                if (insideMetaTag) {
+                    if (line.contains(">")) {
+                        insideMetaTag = false;
+                        builder.append(newMetaTag).append("\n");
+                    }
+                    continue;
                 }
                 builder.append(line).append("\n");
             }
-            try (PrintWriter writer = new PrintWriter(indexHtml)) {
-                writer.println(builder);
-            }
+        }
+
+        try (PrintWriter writer = new PrintWriter(indexHtml)) {
+            writer.print(builder);
         }
     }
 
