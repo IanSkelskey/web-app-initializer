@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.webappinitializer.WebAppInitializerController">
@@ -11,7 +12,12 @@
     </padding>
 
     <!-- Title -->
-    <Label text="Web App Initializer" styleClass="panel-title"/>
+    <Label styleClass="h1">
+        <graphic>
+            <FontIcon iconLiteral="di-react"/>
+        </graphic>
+    </Label>
+    <Label styleClass="h1">React App Helper</Label>
 
     <!-- App Name Input -->
     <Label text="App Name:"/>

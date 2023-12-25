@@ -18,9 +18,7 @@ public class WebAppInitializerController {
     @FXML
     protected void onCreateAppButtonClick() {
         String appName = appNameTextField.getText();
-        boolean isPrettierSelected = prettierCheckBox.isSelected();
-        boolean isTailwindCssSelected = tailwindCssCheckBox.isSelected();
-        boolean isFramerMotionSelected = framerMotionCheckBox.isSelected();
+        boolean installTailwind = tailwindCssCheckBox.isSelected();
 
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select a folder to create your app");
@@ -41,4 +39,6 @@ public class WebAppInitializerController {
             e.printStackTrace();
         }
     }
+
+    private void installTailwindCSS(
 }
