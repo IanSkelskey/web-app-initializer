@@ -4,10 +4,7 @@ import com.example.webappinitializer.util.ProjectInitializer;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -30,12 +27,22 @@ public class WebAppInitializerController {
 
     public int currentStep = 0;
     public VBox prettierConfigContainer;
+    public CheckBox prettierSemiCheckBox;
+    public CheckBox prettierSingleQuoteCheckBox;
+    public CheckBox prettierTrailingCommaCheckBox;
+    public Spinner prettierTabWidthSpinner;
+    public Spinner prettierPrintWidthSpinner;
+    public CheckBox prettierBracketSpacingCheckBox;
+    public CheckBox prettierJSXBracketsCheckBox;
+    public ComboBox prettierEOLComboBox;
+    public Button getStartedButton;
 
     @FXML
     protected void initialize() {
         steps.add(step0Container);
         steps.add(step1Container);
         steps.add(step2Container);
+        getStartedButton.getStyleClass().addAll("btn-lg", "btn-primary");
     }
 
     @FXML
@@ -49,6 +56,7 @@ public class WebAppInitializerController {
         String appName = appNameTextField.getText();
         String description = appDescriptionTextField.getText();
         boolean installTailwind = tailwindCssCheckBox.isSelected();
+        boolean installPrettier = prettierCheckBox.isSelected();
 
         File selectedDirectory = ProjectInitializer.selectDirectory();
         if (selectedDirectory == null) {
@@ -66,6 +74,9 @@ public class WebAppInitializerController {
                 ProjectInitializer.updateReadme(appDirectory, appName, description);
                 if (installTailwind) {
                     ProjectInitializer.installTailwind(new File(selectedDirectory, appName));
+                }
+                if (installPrettier) {
+                    ProjectInitializer.installPrettier(new File(selectedDirectory, appName));
                 }
                 return null;
             }
@@ -126,6 +137,10 @@ public class WebAppInitializerController {
             steps.add(prettierConfigContainer);
         } else {
             steps.remove(prettierConfigContainer);
+        }
+        if (currentStep < steps.size() - 1) {
+            nextButton.setVisible(true);
+            createAppButton.setVisible(false);
         }
     }
 }

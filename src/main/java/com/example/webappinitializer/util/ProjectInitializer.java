@@ -124,7 +124,6 @@ public class ProjectInitializer {
         runProcess(appDirectory, "npm", "install", "--save-dev", "prettier");
     }
 
-
     private static void updateIndexCss(File appDirectory) throws FileNotFoundException {
         File indexCss = new File(appDirectory, "src/index.css");
         try (PrintWriter writer = new PrintWriter(indexCss)) {

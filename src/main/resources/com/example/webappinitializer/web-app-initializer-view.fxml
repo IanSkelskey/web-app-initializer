@@ -17,7 +17,7 @@
                 <FontIcon iconLiteral="di-react" styleClass="h1"/>
                 <Label text="React App Helper" styleClass="h1"/>
                 <Label text="This tool will help you create a new web app."/>
-                <Button text="Get Started" onAction="#handleGetStartedButtonAction" styleClass="btn-primary"/>
+                <Button fx:id="getStartedButton" text="Get Started" onAction="#handleGetStartedButtonAction"/>
             </VBox>
             <!-- Step 1: App Name and Description -->
             <VBox fx:id="step1Container" visible="false" alignment="CENTER" spacing="20.0">
