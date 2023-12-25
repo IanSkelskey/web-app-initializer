@@ -4,13 +4,14 @@ import com.example.webappinitializer.util.ProjectInitializer;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.DirectoryChooser;
 
 import java.io.File;
 
 public class WebAppInitializerController {
 
+    public TextArea appDescriptionTextField;
     @FXML
     private TextField appNameTextField;
 
@@ -20,6 +21,8 @@ public class WebAppInitializerController {
     @FXML
     protected void onCreateAppButtonClick() {
         String appName = appNameTextField.getText();
+        String description = appDescriptionTextField.getText();
+        boolean installTailwind = tailwindCssCheckBox.isSelected();
 
         File selectedDirectory = ProjectInitializer.selectDirectory();
         if (selectedDirectory == null) {
@@ -28,8 +31,14 @@ public class WebAppInitializerController {
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                System.out.println("Directory selected: " + selectedDirectory.getAbsolutePath());
+                File appDirectory = new File(selectedDirectory, appName);
                 ProjectInitializer.createReactApp(appName, selectedDirectory);
+                ProjectInitializer.updatePackageJsonDescription(appDirectory, description);
+                ProjectInitializer.updatePublicIndexDescription(appDirectory, description);
+                ProjectInitializer.removeCommentsFromPublicIndex(appDirectory);
+                if (installTailwind) {
+                    ProjectInitializer.installTailwind(new File(selectedDirectory, appName));
+                }
                 return null;
             }
         };
