@@ -48,19 +48,20 @@
                 <VBox alignment="CENTER" spacing="10.0">
                     <CheckBox fx:id="prettierCheckBox" text="Prettier" styleClass="checkbox"
                               onAction="#handlePrettierCheck"/>
-                    <CheckBox fx:id="tailwindCssCheckBox" text="Tailwind CSS" styleClass="checkbox"/>
+                    <CheckBox fx:id="tailwindCssCheckBox" text="Tailwind CSS" styleClass="checkbox" onAction="#handleTailwindCssCheck"/>
                     <CheckBox fx:id="framerMotionCheckBox" text="Framer Motion" styleClass="checkbox"/>
                 </VBox>
             </VBox>
 
             <!-- Step 3: Configure Modules -->
             <VBox fx:id="tailWindConfigContainer" visible="false" alignment="CENTER" spacing="20.0">
+                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@/images/tailwind-css.png"/>
+                </ImageView>
                 <Label text="Configure Tailwind CSS" styleClass="h2"/>
                 <Label text="Tailwind CSS is a utility-first CSS framework. You can configure it to suit your needs."
                        wrapText="true"/>
                 <Label text="Tailwind CSS Configuration:"/>
-                <TextArea fx:id="tailwindConfigTextArea" promptText="Enter Tailwind CSS Configuration"
-                          styleClass="form-control"/>
             </VBox>
 
             <VBox fx:id="prettierConfigContainer" visible="false" alignment="CENTER" spacing="20.0">

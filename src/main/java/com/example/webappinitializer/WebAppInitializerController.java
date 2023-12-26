@@ -31,6 +31,7 @@ public class WebAppInitializerController {
 
     @FXML
     public VBox prettierConfigContainer;
+    public VBox tailWindConfigContainer;
 
     @FXML
     private CheckBox prettierCheckBox, tailwindCssCheckBox, framerMotionCheckBox, prettierSemiCheckBox, prettierSingleQuoteCheckBox, prettierBracketSpacingCheckBox;
@@ -183,10 +184,18 @@ public class WebAppInitializerController {
     }
 
     public void handlePrettierCheck(ActionEvent actionEvent) {
-        if (prettierCheckBox.isSelected()) {
-            steps.add(prettierConfigContainer);
+        handleModuleSelect(prettierCheckBox, prettierConfigContainer);
+    }
+
+    public void handleTailwindCssCheck(ActionEvent actionEvent) {
+        handleModuleSelect(tailwindCssCheckBox, tailWindConfigContainer);
+    }
+
+    private void handleModuleSelect(CheckBox checkBox, VBox configContainer) {
+        if (checkBox.isSelected()) {
+            steps.add(configContainer);
         } else {
-            steps.remove(prettierConfigContainer);
+            steps.remove(configContainer);
         }
         if (currentStep < steps.size() - 1) {
             nextButton.setVisible(true);
