@@ -1,8 +1,9 @@
-package com.example.webappinitializer.util;
+package com.example.webappinitializer.config;
 
+import com.example.webappinitializer.alert.BuildProgressAlert;
+import com.example.webappinitializer.util.Modules;
+import com.example.webappinitializer.util.ProjectInitializer;
 import javafx.concurrent.Task;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ProgressBar;
 
 import java.io.File;
 import java.util.HashMap;
@@ -25,14 +26,7 @@ public class ProjectConfiguration {
     }
 
     public void build(File destinationDirectory) {
-        ProgressBar progressBar = new ProgressBar();
-        progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Creating Application");
-        alert.setHeaderText(null);
-        alert.setContentText("Please wait...");
-        alert.getDialogPane().setContent(progressBar);
+        BuildProgressAlert alert = new BuildProgressAlert();
 
         Task<Void> task = new Task<>() {
             @Override

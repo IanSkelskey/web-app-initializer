@@ -1,4 +1,4 @@
-package com.example.webappinitializer.util;
+package com.example.webappinitializer.config;
 
 public class PrettierConfiguration extends ModuleConfiguration {
     private boolean semi;

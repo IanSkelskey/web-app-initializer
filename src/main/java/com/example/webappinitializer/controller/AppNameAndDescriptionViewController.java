@@ -19,7 +19,8 @@ public class AppNameAndDescriptionViewController {
     @FXML
     protected void initialize() {
         appShortNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            directoryNameLabel.setText(newValue);
+            // to lowecase and replace spaces with hyphens
+            directoryNameLabel.setText(newValue.toLowerCase().replaceAll("\\s+", "-"));
         });
     }
 

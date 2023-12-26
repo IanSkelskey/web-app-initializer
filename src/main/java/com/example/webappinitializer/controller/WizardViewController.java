@@ -1,13 +1,14 @@
 package com.example.webappinitializer.controller;
 
 import com.example.webappinitializer.util.EventManager;
-import com.example.webappinitializer.util.ProjectConfiguration;
+import com.example.webappinitializer.config.ProjectConfiguration;
 import com.example.webappinitializer.util.ProjectInitializer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.controlsfx.control.BreadCrumbBar;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class WizardViewController {
     public VBox moduleSelectionView;
     public VBox tailwindConfigurationView;
     public VBox prettierConfigurationView;
+    public BreadCrumbBar<String> breadCrumbBar;
 
     @FXML
     protected void initialize() {
@@ -40,6 +42,8 @@ public class WizardViewController {
         steps.add(homeView);
         steps.add(nameAndDescriptionView);
         steps.add(moduleSelectionView);
+
+        // TODO: Module configurations should be added to the steps list dynamically depending on the modules selected
         steps.add(tailwindConfigurationView);
         steps.add(prettierConfigurationView);
         createAppButton.getStyleClass().addAll("btn-lg", "btn-primary");
@@ -50,8 +54,8 @@ public class WizardViewController {
             steps.get(currentStep).setVisible(false);
             steps.get(currentStep + 1).setVisible(true);
             currentStep++;
+
             if (currentStep == steps.size() - 1) {
-                System.out.println("Last step");
                 nextButton.setVisible(false);
                 createAppButton.setVisible(true);
             } else {
