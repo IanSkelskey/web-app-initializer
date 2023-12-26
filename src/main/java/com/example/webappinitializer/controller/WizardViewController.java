@@ -1,4 +1,4 @@
-package com.example.webappinitializer;
+package com.example.webappinitializer.controller;
 
 import com.example.webappinitializer.util.ProjectInitializer;
 import javafx.concurrent.Task;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WebAppInitializerController {
+public class WizardViewController {
 
     public TextArea appDescriptionTextField;
     public StackPane stepsContainer;
@@ -74,6 +74,7 @@ public class WebAppInitializerController {
 
     @FXML
     protected void onCreateAppButtonClick() {
+        // TODO: This should probable be moved to something like a ProjectBuilder class
         String directoryName = directoryNameLabel.getText();
         String shortName = appShortNameTextField.getText();
         String fullName = appFullNameTextField.getText();

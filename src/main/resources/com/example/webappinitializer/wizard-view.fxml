@@ -8,7 +8,7 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.webappinitializer.WebAppInitializerController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.webappinitializer.controller.WizardViewController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
@@ -16,8 +16,8 @@
         <StackPane fx:id="stepsContainer">
             <!-- Step 0: Welcome -->
             <VBox fx:id="step0Container" alignment="CENTER" spacing="20.0">
-                <FontIcon iconLiteral="di-react" styleClass="h1"/>
-                <Label text="React App Helper" styleClass="h1"/>
+                <FontIcon iconLiteral="fas-hat-wizard" styleClass="h1"/>
+                <Label text="React Wizard" styleClass="h1"/>
                 <Label text="This tool will help you create a new web app."/>
                 <Button fx:id="getStartedButton" text="Get Started" onAction="#handleGetStartedButtonAction"/>
             </VBox>

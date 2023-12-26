@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.webappinitializer.controller.TailwindConfigurationViewController"
+      alignment="CENTER" spacing="20.0">
+
+    <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@/images/tailwind-css.png"/>
+    </ImageView>
+    <Label text="Configure Tailwind CSS" styleClass="h2"/>
+    <Label text="Tailwind CSS is a utility-first CSS framework. You can configure it to suit your needs."
+           wrapText="true"/>
+    <Label text="Tailwind CSS Configuration:"/>
+
+</VBox>

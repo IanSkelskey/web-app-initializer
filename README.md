@@ -1,4 +1,4 @@
-# React App Helper
+# React Wizard
 
 React App Helper is a JavaFX application designed to streamline the process of initializing and configuring new React applications. It offers a user-friendly interface to generate React projects with customizable configurations and module installations.
 

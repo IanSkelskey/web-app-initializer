@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.webappinitializer.controller.ModuleSelectionViewController"
+            alignment="CENTER" spacing="20.0">
+
+    <Label text="Select Modules" styleClass="h2"/>
+    <Label text="Select the modules you want to install in your app. You will be able to configure these in future steps."
+           wrapText="true"/>
+    <VBox alignment="CENTER" spacing="10.0">
+        <CheckBox fx:id="prettierCheckBox" text="Prettier" styleClass="checkbox"
+                  onAction="#handlePrettierCheck"/>
+        <CheckBox fx:id="tailwindCssCheckBox" text="Tailwind CSS" styleClass="checkbox" onAction="#handleTailwindCssCheck"/>
+        <CheckBox fx:id="framerMotionCheckBox" text="Framer Motion" styleClass="checkbox"/>
+    </VBox>
+
+</VBox>
