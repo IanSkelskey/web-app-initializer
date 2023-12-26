@@ -17,6 +17,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.NodeVisitor;
 
+import static com.example.webappinitializer.util.JsonHelper.openJsonFileAsJsonObject;
+import static com.example.webappinitializer.util.JsonHelper.saveJsonObjectToFile;
+
 public class ProjectInitializer {
     public static void createReactApp(String appName, File directory) throws IOException, InterruptedException {
         runProcess(directory, "npx", "create-react-app", appName);
@@ -24,38 +27,17 @@ public class ProjectInitializer {
 
     public static void updatePackageJsonDescription(File appDirectory, String description) throws IOException {
         File packageJson = new File(appDirectory, "package.json");
-
-        Gson gson = new Gson();
-        JsonObject packageJsonObject;
-        try (FileReader reader = new FileReader(packageJson)) {
-            packageJsonObject = gson.fromJson(reader, JsonObject.class);
-        }
-
+        JsonObject packageJsonObject = openJsonFileAsJsonObject(packageJson);
         packageJsonObject.addProperty("description", description);
-
-        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter writer = new FileWriter(packageJson)) {
-            prettyGson.toJson(packageJsonObject, writer);
-        }
+        saveJsonObjectToFile(packageJson, packageJsonObject);
     }
 
     public static void updateManifestJsonName(File appDirectory, String shortName, String name) throws IOException {
         File manifestJson = new File(appDirectory, "public/manifest.json");
-
-        Gson gson = new Gson();
-        JsonObject manifestJsonObject;
-        try (FileReader reader = new FileReader(manifestJson)) {
-            manifestJsonObject = gson.fromJson(reader, JsonObject.class);
-        }
-
+        JsonObject manifestJsonObject = openJsonFileAsJsonObject(manifestJson);
         manifestJsonObject.addProperty("short_name", shortName);
         manifestJsonObject.addProperty("name", name);
-
-        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter writer = new FileWriter(manifestJson)) {
-            prettyGson.toJson(manifestJsonObject, writer);
-        }
-
+        saveJsonObjectToFile(manifestJson, manifestJsonObject);
     }
 
     public static void updatePublicIndexTitle(File appDirectory, String title) throws IOException {

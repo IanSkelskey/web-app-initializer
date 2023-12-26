@@ -1,5 +1,7 @@
 package com.example.webappinitializer.config;
 
+import com.google.gson.JsonObject;
+
 public class PrettierConfiguration extends ModuleConfiguration {
     private boolean semi;
     private boolean singleQuote;
@@ -87,14 +89,18 @@ public class PrettierConfiguration extends ModuleConfiguration {
 
     @Override
     public String toString() {
-        return "PrettierConfiguration{" +
-                "semi=" + semi +
-                ", singleQuote=" + singleQuote +
-                ", bracketSpacing=" + bracketSpacing +
-                ", trailingComma='" + trailingComma + '\'' +
-                ", tabWidth=" + tabWidth +
-                ", printWidth=" + printWidth +
-                ", endOfLine='" + endOfLine + '\'' +
-                '}';
+        return toJson().toString();
+    }
+
+    public JsonObject toJson() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("semi", semi);
+        jsonObject.addProperty("singleQuote", singleQuote);
+        jsonObject.addProperty("bracketSpacing", bracketSpacing);
+        jsonObject.addProperty("trailingComma", trailingComma);
+        jsonObject.addProperty("tabWidth", tabWidth);
+        jsonObject.addProperty("printWidth", printWidth);
+        jsonObject.addProperty("endOfLine", endOfLine);
+        return jsonObject;
     }
 }
