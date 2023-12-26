@@ -9,16 +9,72 @@ public class PrettierConfiguration extends ModuleConfiguration {
     private int printWidth;
     private String endOfLine;
 
-    public void printPreview() {
-        String preview = "{\n" +
-                "  semi: " + semi + ",\n" +
-                "  singleQuote: " + singleQuote + ",\n" +
-                "  trailingComma: \"" + trailingComma + "\",\n" +
-                "  tabWidth: " + tabWidth + ",\n" +
-                "  printWidth: " + printWidth + ",\n" +
-                "  bracketSpacing: " + bracketSpacing + ",\n" +
-                "  endOfLine: \"" + endOfLine + "\",\n" +
-                "};";
-        System.out.println(preview);
+    public boolean isSemi() {
+        return semi;
+    }
+
+    public void setSemi(boolean semi) {
+        this.semi = semi;
+    }
+
+    public boolean isSingleQuote() {
+        return singleQuote;
+    }
+
+    public void setSingleQuote(boolean singleQuote) {
+        this.singleQuote = singleQuote;
+    }
+
+    public boolean isBracketSpacing() {
+        return bracketSpacing;
+    }
+
+    public void setBracketSpacing(boolean bracketSpacing) {
+        this.bracketSpacing = bracketSpacing;
+    }
+
+    public String getTrailingComma() {
+        return trailingComma;
+    }
+
+    public void setTrailingComma(String trailingComma) {
+        this.trailingComma = trailingComma;
+    }
+
+    public int getTabWidth() {
+        return tabWidth;
+    }
+
+    public void setTabWidth(int tabWidth) {
+        this.tabWidth = tabWidth;
+    }
+
+    public int getPrintWidth() {
+        return printWidth;
+    }
+
+    public void setPrintWidth(int printWidth) {
+        this.printWidth = printWidth;
+    }
+
+    public String getEndOfLine() {
+        return endOfLine;
+    }
+
+    public void setEndOfLine(String endOfLine) {
+        this.endOfLine = endOfLine;
+    }
+
+    @Override
+    public String toString() {
+        return "PrettierConfiguration{" +
+                "semi=" + semi +
+                ", singleQuote=" + singleQuote +
+                ", bracketSpacing=" + bracketSpacing +
+                ", trailingComma='" + trailingComma + '\'' +
+                ", tabWidth=" + tabWidth +
+                ", printWidth=" + printWidth +
+                ", endOfLine='" + endOfLine + '\'' +
+                '}';
     }
 }

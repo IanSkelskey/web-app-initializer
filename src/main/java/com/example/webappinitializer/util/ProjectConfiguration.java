@@ -1,5 +1,10 @@
 package com.example.webappinitializer.util;
 
+import javafx.concurrent.Task;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ProgressBar;
+
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -17,6 +22,70 @@ public class ProjectConfiguration {
         this.fullName = "";
         this.description = "";
         this.modules = new HashMap<>();
+    }
+
+    public void build(File destinationDirectory) {
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Creating Application");
+        alert.setHeaderText(null);
+        alert.setContentText("Please wait...");
+        alert.getDialogPane().setContent(progressBar);
+
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                File appDirectory = new File(destinationDirectory, directoryName);
+                ProjectInitializer.createReactApp(directoryName, destinationDirectory);
+                ProjectInitializer.updatePackageJsonDescription(appDirectory, description);
+                ProjectInitializer.updatePublicIndexDescription(appDirectory, description);
+                ProjectInitializer.updatePublicIndexTitle(appDirectory, fullName);
+                ProjectInitializer.removeCommentsFromPublicIndex(appDirectory);
+                ProjectInitializer.updateReadme(appDirectory, fullName, description);
+                ProjectInitializer.updateManifestJsonName(appDirectory, shortName, fullName);
+                if (modules.containsKey(Modules.TAILWIND_CSS)) {
+                    ProjectInitializer.installTailwind(appDirectory);
+                }
+                if (modules.containsKey(Modules.PRETTIER)) {
+                    ProjectInitializer.installPrettier(appDirectory);
+
+                    ModuleConfiguration moduleConfig = modules.get(Modules.PRETTIER);
+                    if (moduleConfig instanceof PrettierConfiguration) {
+                        PrettierConfiguration prettierConfig = (PrettierConfiguration) moduleConfig;
+
+                        Map<String, Object> prettierOptions = new HashMap<>();
+                        prettierOptions.put("semi", prettierConfig.isSemi());
+                        prettierOptions.put("singleQuote", prettierConfig.isSingleQuote());
+                        prettierOptions.put("tabWidth", prettierConfig.getTabWidth());
+                        prettierOptions.put("printWidth", prettierConfig.getPrintWidth());
+
+                        ProjectInitializer.configurePrettier(appDirectory, prettierOptions);
+                        ProjectInitializer.runPrettier(appDirectory);
+                    }
+                }
+
+                if (modules.containsKey(Modules.FRAMER_MOTION)) {
+                    ProjectInitializer.installFramerMotion(appDirectory);
+                }
+                return null;
+            }
+        };
+
+        task.setOnSucceeded(event -> {
+            alert.close();
+            System.out.println("React app created successfully");
+        });
+
+        task.setOnFailed(event -> {
+            Throwable exception = task.getException();
+            System.out.println("Failed to create React app: " + exception.getMessage());
+        });
+
+        new Thread(task).start();
+        alert.showAndWait();
+
     }
 
     public void setDirectoryName(String directoryName) {
