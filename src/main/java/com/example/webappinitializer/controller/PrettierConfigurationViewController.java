@@ -1,5 +1,7 @@
 package com.example.webappinitializer.controller;
 
+import com.example.webappinitializer.config.PrettierConfiguration;
+import com.example.webappinitializer.util.EventManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -8,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 
 public class PrettierConfigurationViewController {
+
+    public PrettierConfiguration configuration = new PrettierConfiguration();
+
     public CheckBox prettierSemiCheckBox;
     public CheckBox prettierSingleQuoteCheckBox;
     public ComboBox prettierTrailingCommaComboBox;
@@ -31,23 +36,19 @@ public class PrettierConfigurationViewController {
     }
 
     public void handlePrettierConfigChange(ActionEvent actionEvent) {
-        // TODO: This should also update the configuration with the project configuration manager
-        boolean semi = prettierSemiCheckBox.isSelected();
-        boolean singleQuote = prettierSingleQuoteCheckBox.isSelected();
-        boolean bracketSpacing = prettierBracketSpacingCheckBox.isSelected();
-        String trailingComma = prettierTrailingCommaComboBox.getValue().toString().toLowerCase();
-        int tabWidth = (int) prettierTabWidthSpinner.getValue();
-        int printWidth = (int) prettierPrintWidthSpinner.getValue();
-        String endOfLine = prettierEOLComboBox.getValue().toString().toLowerCase();
-        String preview = "{\n" +
-                "  semi: " + semi + ",\n" +
-                "  singleQuote: " + singleQuote + ",\n" +
-                "  trailingComma: \"" + trailingComma + "\",\n" +
-                "  tabWidth: " + tabWidth + ",\n" +
-                "  printWidth: " + printWidth + ",\n" +
-                "  bracketSpacing: " + bracketSpacing + ",\n" +
-                "  endOfLine: \"" + endOfLine + "\",\n" +
-                "};";
-        prettierConfigPreview.setText(preview);
+        configuration = new PrettierConfiguration(
+                prettierSemiCheckBox.isSelected(),
+                prettierSingleQuoteCheckBox.isSelected(),
+                prettierBracketSpacingCheckBox.isSelected(),
+                prettierTrailingCommaComboBox.getValue().toString().toLowerCase(),
+                (int) prettierTabWidthSpinner.getValue(),
+                (int) prettierPrintWidthSpinner.getValue(),
+                prettierEOLComboBox.getValue().toString().toLowerCase()
+        );
+
+        EventManager.publish("prettierConfigChanged", configuration);
+
+        prettierConfigPreview.setText(configuration.toString());
+
     }
 }

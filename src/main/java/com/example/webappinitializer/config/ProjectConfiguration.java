@@ -131,4 +131,8 @@ public class ProjectConfiguration {
     public void removeModule(Modules module) {
         this.modules.remove(module);
     }
+
+    public void setModuleConfiguration(Modules module, ModuleConfiguration config) {
+        this.modules.put(module, config);
+    }
 }

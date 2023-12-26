@@ -3,14 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.webappinitializer.controller.AppNameAndDescriptionViewController"
-            alignment="CENTER" spacing="20.0">
-    <Label text="Name and Description of App" styleClass="h2" wrapText="true" alignment="CENTER"/>
-    <Label
-            text="Enter the name and description of your app. This information will be used to name the app directory, populate the title and metadata in index.html and update the relevant fields in manifest.json and package.json"
-            wrapText="true"/>
+<?import com.example.webappinitializer.view.StepView?>
+<StepView xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="com.example.webappinitializer.controller.AppNameAndDescriptionViewController"
+          alignment="CENTER" spacing="20.0"
+          name="Name and Description"
+          description="Enter the name and description of your app. This information will be used to name the app directory, populate the title and metadata in index.html and update the relevant fields in manifest.json and package.json">
+
     <HBox spacing="10.0">
         <Label text="Directory Name:"/>
         <Label fx:id="directoryNameLabel" styleClass="form-control"/>
@@ -23,4 +23,4 @@
     <Label text="Description:"/>
     <TextArea fx:id="appDescriptionTextField" promptText="Enter App Description" styleClass="form-control"/>
 
-</VBox>
+</StepView>

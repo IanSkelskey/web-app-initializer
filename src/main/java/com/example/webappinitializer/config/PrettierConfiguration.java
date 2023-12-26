@@ -9,6 +9,26 @@ public class PrettierConfiguration extends ModuleConfiguration {
     private int printWidth;
     private String endOfLine;
 
+    public PrettierConfiguration() {
+        this.semi = true;
+        this.singleQuote = true;
+        this.bracketSpacing = true;
+        this.trailingComma = "es5";
+        this.tabWidth = 4;
+        this.printWidth = 120;
+        this.endOfLine = "lf";
+    }
+
+    public PrettierConfiguration(boolean semi, boolean singleQuote, boolean bracketSpacing, String trailingComma, int tabWidth, int printWidth, String endOfLine) {
+        this.semi = semi;
+        this.singleQuote = singleQuote;
+        this.bracketSpacing = bracketSpacing;
+        this.trailingComma = trailingComma;
+        this.tabWidth = tabWidth;
+        this.printWidth = printWidth;
+        this.endOfLine = endOfLine;
+    }
+
     public boolean isSemi() {
         return semi;
     }

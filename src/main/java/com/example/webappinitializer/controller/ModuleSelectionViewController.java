@@ -1,5 +1,7 @@
 package com.example.webappinitializer.controller;
 
+import com.example.webappinitializer.util.EventManager;
+import com.example.webappinitializer.util.Modules;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -18,11 +20,18 @@ public class ModuleSelectionViewController {
     }
 
     private void handleModuleSelection(CheckBox checkBox) {
-        if (checkBox.isSelected()) {
-            // TODO: Add the module to the list of modules
-            // TODO: This should be part of the project configuration manager
+        Modules module;
+        if (checkBox == prettierCheckBox) {
+            module = Modules.PRETTIER;
+        } else if (checkBox == tailwindCssCheckBox) {
+            module = Modules.TAILWIND_CSS;
         } else {
-            // TODO: Remove the module from the list of modules
+            module = Modules.FRAMER_MOTION;
+        }
+        if (checkBox.isSelected()) {
+            EventManager.publish("module-selected", module);
+        } else {
+            EventManager.publish("module-deselected", module);
         }
 
     }

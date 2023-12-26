@@ -3,14 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.webappinitializer.controller.ModuleSelectionViewController"
-            alignment="CENTER" spacing="20.0">
+<?import com.example.webappinitializer.view.StepView?>
+<StepView xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="com.example.webappinitializer.controller.ModuleSelectionViewController"
+          alignment="CENTER" spacing="20.0" name="Select Modules" description="Select the modules you want to install in your app. You will be able to configure these in future steps.">
 
-    <Label text="Select Modules" styleClass="h2"/>
-    <Label text="Select the modules you want to install in your app. You will be able to configure these in future steps."
-           wrapText="true"/>
     <VBox alignment="CENTER" spacing="10.0">
         <CheckBox fx:id="prettierCheckBox" text="Prettier" styleClass="checkbox"
                   onAction="#handlePrettierCheck"/>
@@ -18,4 +16,4 @@
         <CheckBox fx:id="framerMotionCheckBox" text="Framer Motion" styleClass="checkbox"/>
     </VBox>
 
-</VBox>
+</StepView>

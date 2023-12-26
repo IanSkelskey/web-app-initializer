@@ -1,5 +1,6 @@
 package com.example.webappinitializer.controller;
 
+import com.example.webappinitializer.util.EventManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -19,8 +20,16 @@ public class AppNameAndDescriptionViewController {
     @FXML
     protected void initialize() {
         appShortNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            // to lowecase and replace spaces with hyphens
-            directoryNameLabel.setText(newValue.toLowerCase().replaceAll("\\s+", "-"));
+            String directoryName = newValue.toLowerCase().replaceAll("\\s+", "-");
+            directoryNameLabel.setText(directoryName);
+            EventManager.publish("appShortNameChanged", newValue);
+            EventManager.publish("directoryNameChanged", directoryName);
+        });
+        appFullNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            EventManager.publish("appFullNameChanged", newValue);
+        });
+        appDescriptionTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            EventManager.publish("appDescriptionChanged", newValue);
         });
     }
 
