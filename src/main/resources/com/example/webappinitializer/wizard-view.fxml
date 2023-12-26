@@ -11,17 +11,17 @@
     <center>
         <StackPane fx:id="stepsContainer">
             <!-- Step 0: Welcome -->
-            <fx:include source="home-view.fxml"/>
+            <fx:include source="home-view.fxml" fx:id="homeView" visible="true"/>
 
             <!-- Step 1: App Name and Description -->
-            <fx:include source="app-name-and-description-view.fxml"/>
+            <fx:include source="app-name-and-description-view.fxml" fx:id="nameAndDescriptionView" visible="false"/>
 
             <!-- Step 2: Select Modules -->
-            <fx:include source="module-selection-view.fxml"/>
+            <fx:include source="module-selection-view.fxml" fx:id="moduleSelectionView" visible="false"/>
 
             <!-- Step 3: Configure Modules -->
-            <fx:include source="tailwind-configuration-view.fxml"/>
-            <fx:include source="prettier-configuration-view.fxml"/>
+            <fx:include source="tailwind-configuration-view.fxml" fx:id="tailwindConfigurationView" visible="false"/>
+            <fx:include source="prettier-configuration-view.fxml" fx:id="prettierConfigurationView" visible="false"/>
 
         </StackPane>
     </center>
