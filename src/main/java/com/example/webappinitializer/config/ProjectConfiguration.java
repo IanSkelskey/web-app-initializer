@@ -1,6 +1,6 @@
 package com.example.webappinitializer.config;
 
-import com.example.webappinitializer.util.Modules;
+import com.example.webappinitializer.util.Module;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -10,7 +10,7 @@ public class ProjectConfiguration {
     private String shortName;
     private String fullName;
     private String description;
-    private final Map<Modules, ModuleConfiguration> modules;
+    private final Map<Module, ModuleConfiguration> modules;
 
     public ProjectConfiguration() {
         this.directoryName = "";
@@ -52,9 +52,9 @@ public class ProjectConfiguration {
         return this.description;
     }
 
-    public void addModule(Modules module) {
+    public void addModule(Module module) {
         ModuleConfiguration config;
-        if (Objects.requireNonNull(module) == Modules.PRETTIER) {
+        if (Objects.requireNonNull(module) == Module.PRETTIER) {
             config = new PrettierConfiguration();
         } else {
             config = null;
@@ -62,15 +62,15 @@ public class ProjectConfiguration {
         this.modules.put(module, config);
     }
 
-    public Map<Modules, ModuleConfiguration> getModules() {
+    public Map<Module, ModuleConfiguration> getModules() {
         return this.modules;
     }
 
-    public void removeModule(Modules module) {
+    public void removeModule(Module module) {
         this.modules.remove(module);
     }
 
-    public void setModuleConfiguration(Modules module, ModuleConfiguration config) {
+    public void setModuleConfiguration(Module module, ModuleConfiguration config) {
         this.modules.put(module, config);
     }
 }

@@ -1,7 +1,8 @@
 package com.example.webappinitializer.form;
 
 import com.example.webappinitializer.util.EventManager;
-import com.example.webappinitializer.util.Modules;
+import com.example.webappinitializer.util.EventType;
+import com.example.webappinitializer.util.Module;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
@@ -33,18 +34,18 @@ public class ModuleSelectionForm extends VBox {
     }
 
     private void handleModuleSelection(CheckBox checkBox) {
-        Modules module;
+        Module module;
         if (checkBox == prettierCheckBox) {
-            module = Modules.PRETTIER;
+            module = Module.PRETTIER;
         } else if (checkBox == tailwindCheckBox) {
-            module = Modules.TAILWIND_CSS;
+            module = Module.TAILWIND_CSS;
         } else {
-            module = Modules.FRAMER_MOTION;
+            module = Module.FRAMER_MOTION;
         }
         if (checkBox.isSelected()) {
-            EventManager.publish("module-selected", module);
+            EventManager.publish(EventType.MODULE_SELECTED, module);
         } else {
-            EventManager.publish("module-deselected", module);
+            EventManager.publish(EventType.MODULE_DESELECTED, module);
         }
 
     }

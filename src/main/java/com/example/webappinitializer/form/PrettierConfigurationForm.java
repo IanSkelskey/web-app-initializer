@@ -2,6 +2,7 @@ package com.example.webappinitializer.form;
 
 import com.example.webappinitializer.config.PrettierConfiguration;
 import com.example.webappinitializer.util.EventManager;
+import com.example.webappinitializer.util.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -77,7 +78,7 @@ public class PrettierConfigurationForm extends VBox {
                 EOLComboBox.getValue().toLowerCase()
         );
 
-        EventManager.publish("prettierConfigChanged", configuration);
+        EventManager.publish(EventType.PRETTIER_CONFIG_CHANGED, configuration);
 
     }
 }

@@ -2,6 +2,7 @@ package com.example.webappinitializer.controller;
 
 import com.example.webappinitializer.component.WizardView;
 import com.example.webappinitializer.util.EventManager;
+import com.example.webappinitializer.util.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
@@ -14,11 +15,11 @@ public class AppViewController {
     protected void initialize() {
         homeView.setVisible(true);
         wizardView.setVisible(false);
-        EventManager.subscribe("getStartedButtonClicked", (event) -> {
+        EventManager.subscribe(EventType.GET_STARTED_BUTTON_CLICKED, (event) -> {
             homeView.setVisible(false);
             wizardView.setVisible(true);
         });
-        EventManager.subscribe("homeButtonClicked", (event) -> {
+        EventManager.subscribe(EventType.HOME_BUTTON_CLICKED, (event) -> {
             homeView.setVisible(true);
             wizardView.setVisible(false);
         });

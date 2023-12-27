@@ -1,7 +1,8 @@
 package com.example.webappinitializer.config;
 
 import com.example.webappinitializer.util.EventManager;
-import com.example.webappinitializer.util.Modules;
+import com.example.webappinitializer.util.EventType;
+import com.example.webappinitializer.util.Module;
 import com.example.webappinitializer.util.ProjectBuilder;
 
 import java.io.File;
@@ -26,42 +27,55 @@ public class ProjectConfigurationManager {
     /**
      * Subscribes to events that are fired when the configuration changes.
      */
-    private void subscribeToConfigurationChangeEvents() {
-        EventManager.subscribe("directoryNameChanged", (newName) -> {
+    public void subscribeToConfigurationChangeEvents() {
+        EventManager.subscribe(EventType.DIRECTORY_NAME_CHANGED, (newName) -> {
+            System.out.println("directory name changed: " + newName);
             configuration.setDirectoryName((String) newName);
-            EventManager.publish("projectConfigurationUpdated", configuration);
+            EventManager.publish(EventType.PROJECT_CONFIGURATION_UPDATED, configuration);
         });
 
-        EventManager.subscribe("appShortNameChanged", (newName) -> {
+        EventManager.subscribe(EventType.SHORT_NAME_CHANGED, (newName) -> {
             configuration.setShortName((String) newName);
-            EventManager.publish("projectConfigurationUpdated", configuration);
+            EventManager.publish(EventType.PROJECT_CONFIGURATION_UPDATED, configuration);
         });
 
-        EventManager.subscribe("appFullNameChanged", (newName) -> {
+        EventManager.subscribe(EventType.FULL_NAME_CHANGED, (newName) -> {
             configuration.setFullName((String) newName);
-            EventManager.publish("projectConfigurationUpdated", configuration);
+            EventManager.publish(EventType.PROJECT_CONFIGURATION_UPDATED, configuration);
         });
 
-        EventManager.subscribe("appDescriptionChanged", (newDescription) -> {
+        EventManager.subscribe(EventType.DESCRIPTION_CHANGED, (newDescription) -> {
             configuration.setDescription((String) newDescription);
-            EventManager.publish("projectConfigurationUpdated", configuration);
+            EventManager.publish(EventType.PROJECT_CONFIGURATION_UPDATED, configuration);
         });
 
-        EventManager.subscribe("prettierConfigChanged", (newConfig) -> {
-            configuration.setModuleConfiguration(Modules.PRETTIER, (PrettierConfiguration) newConfig);
-            EventManager.publish("projectConfigurationUpdated", configuration);
+        EventManager.subscribe(EventType.PRETTIER_CONFIG_CHANGED, (newConfig) -> {
+            configuration.setModuleConfiguration(Module.PRETTIER, (PrettierConfiguration) newConfig);
+            EventManager.publish(EventType.PROJECT_CONFIGURATION_UPDATED, configuration);
         });
 
-        EventManager.subscribe("module-selected", (module) -> {
+        EventManager.subscribe(EventType.MODULE_SELECTED, (module) -> {
             System.out.println("module selected: " + module);
-            configuration.addModule((Modules) module);
-            EventManager.publish("projectConfigurationUpdated", configuration);
+            if (module == Module.TAILWIND_CSS) {
+                configuration.addModule(Module.TAILWIND_CSS);
+            } else if (module == Module.PRETTIER) {
+                configuration.addModule(Module.PRETTIER);
+            } else if (module == Module.FRAMER_MOTION) {
+                configuration.addModule(Module.FRAMER_MOTION);
+            }
+            EventManager.publish(EventType.PROJECT_CONFIGURATION_UPDATED, configuration);
         });
 
-        EventManager.subscribe("module-deselected", (module) -> {
+        EventManager.subscribe(EventType.MODULE_DESELECTED, (module) -> {
             System.out.println("module deselected: " + module);
-            configuration.removeModule((Modules) module);
-            EventManager.publish("projectConfigurationUpdated", configuration);
+            if (module == Module.TAILWIND_CSS) {
+                configuration.removeModule(Module.TAILWIND_CSS);
+            } else if (module == Module.PRETTIER) {
+                configuration.removeModule(Module.PRETTIER);
+            } else if (module == Module.FRAMER_MOTION) {
+                configuration.removeModule(Module.FRAMER_MOTION);
+            }
+            EventManager.publish(EventType.PROJECT_CONFIGURATION_UPDATED, configuration);
         });
     }
 

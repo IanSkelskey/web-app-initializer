@@ -18,7 +18,7 @@ public class ProjectBuilder {
         String shortName = config.getShortName();
         String fullName = config.getFullName();
         String description = config.getDescription();
-        Map<Modules, ModuleConfiguration> modules = config.getModules();
+        Map<Module, ModuleConfiguration> modules = config.getModules();
 
         BuildProgressAlert alert = new BuildProgressAlert();
 
@@ -33,13 +33,13 @@ public class ProjectBuilder {
                 ProjectInitializer.removeCommentsFromPublicIndex(appDirectory);
                 ProjectInitializer.updateReadme(appDirectory, fullName, description);
                 ProjectInitializer.updateManifestJsonName(appDirectory, shortName, fullName);
-                if (modules.containsKey(Modules.TAILWIND_CSS)) {
+                if (modules.containsKey(Module.TAILWIND_CSS)) {
                     ProjectInitializer.installTailwind(appDirectory);
                 }
-                if (modules.containsKey(Modules.PRETTIER)) {
+                if (modules.containsKey(Module.PRETTIER)) {
                     ProjectInitializer.installPrettier(appDirectory);
 
-                    ModuleConfiguration moduleConfig = modules.get(Modules.PRETTIER);
+                    ModuleConfiguration moduleConfig = modules.get(Module.PRETTIER);
                     if (moduleConfig instanceof PrettierConfiguration prettierConfig) {
 
                         Map<String, Object> prettierOptions = new HashMap<>();
@@ -53,7 +53,7 @@ public class ProjectBuilder {
                     }
                 }
 
-                if (modules.containsKey(Modules.FRAMER_MOTION)) {
+                if (modules.containsKey(Module.FRAMER_MOTION)) {
                     ProjectInitializer.installFramerMotion(appDirectory);
                 }
                 return null;

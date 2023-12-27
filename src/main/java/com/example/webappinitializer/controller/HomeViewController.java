@@ -2,6 +2,7 @@ package com.example.webappinitializer.controller;
 
 import com.example.webappinitializer.alert.ComingSoonAlert;
 import com.example.webappinitializer.util.EventManager;
+import com.example.webappinitializer.util.EventType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,7 +20,7 @@ public class HomeViewController {
     }
 
     public void handleGetStartedButtonAction(ActionEvent actionEvent) {
-        EventManager.publish("getStartedButtonClicked", null);
+        EventManager.publish(EventType.GET_STARTED_BUTTON_CLICKED, null);
     }
 
     public void handleLoadConfigButtonAction(ActionEvent actionEvent) {

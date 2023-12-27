@@ -1,6 +1,7 @@
 package com.example.webappinitializer.form;
 
 import com.example.webappinitializer.util.EventManager;
+import com.example.webappinitializer.util.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -21,14 +22,14 @@ public class NameAndDescriptionForm extends VBox {
         shortNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             directoryName = newValue.toLowerCase().replaceAll("\\s+", "-");
             directoryNameLabel.setText(directoryName);
-            EventManager.publish("appShortNameChanged", newValue);
-            EventManager.publish("directoryNameChanged", directoryName);
+            EventManager.publish(EventType.SHORT_NAME_CHANGED, newValue);
+            EventManager.publish(EventType.DIRECTORY_NAME_CHANGED, directoryName);
         });
         fullNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            EventManager.publish("appFullNameChanged", newValue);
+            EventManager.publish(EventType.FULL_NAME_CHANGED, newValue);
         });
         descriptionTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
-            EventManager.publish("appDescriptionChanged", newValue);
+            EventManager.publish(EventType.DESCRIPTION_CHANGED, newValue);
         });
         setAlignment(CENTER);
         setSpacing(20);

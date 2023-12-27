@@ -2,7 +2,8 @@ package com.example.webappinitializer.component;
 
 import com.example.webappinitializer.config.ProjectConfigurationManager;
 import com.example.webappinitializer.util.EventManager;
-import com.example.webappinitializer.util.Modules;
+import com.example.webappinitializer.util.EventType;
+import com.example.webappinitializer.util.Module;
 import com.example.webappinitializer.util.ProjectInitializer;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -43,22 +44,22 @@ public class WizardView extends BorderPane {
         addStep(nameAndDescriptionView);
         addStep(moduleSelectionView);
         addStep(configurationSummaryView);
-        EventManager.subscribe("backButtonClicked", (event) -> handleBackButtonClicked());
-        EventManager.subscribe("nextButtonClicked", (event) -> handleNextButtonClicked());
-        EventManager.subscribe("createAppButtonClicked", (event) -> handleCreateAppButtonClicked());
-        EventManager.subscribe("module-selected", (module) -> {
-            if (module == Modules.TAILWIND_CSS) {
+        EventManager.subscribe(EventType.BACK_BUTTON_CLICKED, (event) -> handleBackButtonClicked());
+        EventManager.subscribe(EventType.NEXT_BUTTON_CLICKED, (event) -> handleNextButtonClicked());
+        EventManager.subscribe(EventType.CREATE_APP_BUTTON_CLICKED, (event) -> handleCreateAppButtonClicked());
+        EventManager.subscribe(EventType.MODULE_SELECTED, (module) -> {
+            if (module == Module.TAILWIND_CSS) {
                 addStep(tailwindConfigurationView);
-            } else if (module == Modules.PRETTIER) {
+            } else if (module == Module.PRETTIER) {
                 addStep(prettierConfigurationView);
             }
             updateUI();
         });
 
-        EventManager.subscribe("module-deselected", (module) -> {
-            if (module == Modules.TAILWIND_CSS) {
+        EventManager.subscribe(EventType.MODULE_DESELECTED, (module) -> {
+            if (module == Module.TAILWIND_CSS) {
                 removeStep(tailwindConfigurationView);
-            } else if (module == Modules.PRETTIER) {
+            } else if (module == Module.PRETTIER) {
                 removeStep(prettierConfigurationView);
             }
             updateUI();

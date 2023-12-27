@@ -2,6 +2,7 @@ package com.example.webappinitializer.component;
 
 import com.example.webappinitializer.config.ProjectConfiguration;
 import com.example.webappinitializer.util.EventManager;
+import com.example.webappinitializer.util.EventType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -14,7 +15,7 @@ public class ConfigurationSummaryView extends StepView {
     private ProjectConfiguration projectConfiguration = new ProjectConfiguration();
 
     public ConfigurationSummaryView() {
-        EventManager.subscribe("projectConfigurationUpdated", (config) -> {
+        EventManager.subscribe(EventType.PROJECT_CONFIGURATION_UPDATED, (config) -> {
             projectConfiguration = (ProjectConfiguration) config;
             initSummary();
         });
@@ -36,7 +37,6 @@ public class ConfigurationSummaryView extends StepView {
         summary.getChildren().add(new Label("Description: " + projectConfiguration.getDescription()));
         summary.getChildren().add(new Label("Modules: "));
         projectConfiguration.getModules().forEach((key, value) -> {
-            System.out.println("key: " + key.name() + " value: " + value);
             summary.getChildren().add(new Label("  " + key.name()));
         });
         initCreateAppButton();
@@ -44,7 +44,7 @@ public class ConfigurationSummaryView extends StepView {
 
     private void initCreateAppButton() {
         Button createAppButton = new Button("Create App");
-        createAppButton.setOnAction(event -> EventManager.publish("createAppButtonClicked", null));
+        createAppButton.setOnAction(event -> EventManager.publish(EventType.CREATE_APP_BUTTON_CLICKED, null));
         createAppButton.getStyleClass().addAll("btn-primary", "btn-lg");
         summary.getChildren().add(createAppButton);
     }

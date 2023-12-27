@@ -14,14 +14,14 @@ public class EventManager {
     /**
      * A HashMap of event names and listeners.
      */
-    private static final HashMap<String, Consumer<Object>> listeners = new HashMap<>();
+    private static final HashMap<EventType , Consumer<Object>> listeners = new HashMap<>();
 
     /**
      * Subscribe to an event.
      * @param event The event name.
      * @param listener The listener.
      */
-    public static void subscribe(String event, Consumer<Object> listener) {
+    public static void subscribe(EventType  event, Consumer<Object> listener) {
         listeners.put(event, listener);
     }
 
@@ -30,7 +30,7 @@ public class EventManager {
      * @param event The event name.
      * @param message The message to send to the listener.
      */
-    public static void publish(String event, Object message) {
+    public static void publish(EventType  event, Object message) {
         if (listeners.containsKey(event)) {
             listeners.get(event).accept(message);
         }

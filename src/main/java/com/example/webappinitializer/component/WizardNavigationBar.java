@@ -1,6 +1,7 @@
 package com.example.webappinitializer.component;
 
 import com.example.webappinitializer.util.EventManager;
+import com.example.webappinitializer.util.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -26,21 +27,21 @@ public class WizardNavigationBar extends HBox {
         FontIcon homeIcon = new FontIcon(FontAwesomeSolid.HOME);
         homeIcon.setIconColor(javafx.scene.paint.Color.WHITE);
         homeButton.setGraphic(homeIcon);
-        homeButton.setOnAction(event -> EventManager.publish("homeButtonClicked", null));
+        homeButton.setOnAction(event -> EventManager.publish(EventType.HOME_BUTTON_CLICKED, null));
         homeButton.getStyleClass().addAll("btn-primary", "btn-lg");
         getChildren().add(homeButton);
     }
 
     private void initBackButton() {
         Button backButton = new Button("Back");
-        backButton.setOnAction(event -> EventManager.publish("backButtonClicked", null));
+        backButton.setOnAction(event -> EventManager.publish(EventType.BACK_BUTTON_CLICKED, null));
         backButton.getStyleClass().addAll("btn-primary", "btn-lg");
         getChildren().add(backButton);
     }
 
     private void initNextButton() {
         Button nextButton = new Button("Next");
-        nextButton.setOnAction(event -> EventManager.publish("nextButtonClicked", null));
+        nextButton.setOnAction(event -> EventManager.publish(EventType.NEXT_BUTTON_CLICKED, null));
         nextButton.getStyleClass().addAll("btn-primary", "btn-lg");
         getChildren().add(nextButton);
     }

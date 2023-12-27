@@ -1,0 +1,30 @@
+name: Generate and Publish JavaDocs
+
+on:
+  push:
+    branches:
+      - main  # or your default branch
+
+jobs:
+  javadoc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'  # or your project's JDK version
+          distribution: 'adopt'
+
+      - name: Generate JavaDoc
+        run: |
+          mkdir javadoc
+          javadoc -d javadoc $(find . -type f -name '*.java')  # Update command as per your project structure
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./javadoc
+          publish_branch: javadocs  # Target branch
