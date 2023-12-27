@@ -54,7 +54,7 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/config/ProjectConfiguration.html#addModule(com.example.webappinitializer.util.Module)" class="member-name-link">addModule(Module)</a> - Method in class com.example.webappinitializer.config.<a href="com.example.webappinitializer/com/example/webappinitializer/config/ProjectConfiguration.html" title="class in com.example.webappinitializer.config">ProjectConfiguration</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html#addStep(com.example.webappinitializer.component.StepView)" class="member-name-link">addStep(StepView)</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html" title="class in com.example.webappinitializer.component">WizardView</a></dt>
+<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html#addStep(com.example.webappinitializer.component.StepView)" class="member-name-link">addStep(StepView)</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html" title="class in com.example.webappinitializer.component">StepContainer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/controller/AppViewController.html" class="type-name-link" title="class in com.example.webappinitializer.controller">AppViewController</a> - Class in <a href="com.example.webappinitializer/com/example/webappinitializer/controller/package-summary.html">com.example.webappinitializer.controller</a></dt>
 <dd>&nbsp;</dd>
@@ -108,8 +108,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/util/ProjectInitializer.html#createReactApp(java.lang.String,java.io.File)" class="member-name-link">createReactApp(String, File)</a> - Static method in class com.example.webappinitializer.util.<a href="com.example.webappinitializer/com/example/webappinitializer/util/ProjectInitializer.html" title="class in com.example.webappinitializer.util">ProjectInitializer</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html#currentStep" class="member-name-link">currentStep</a> - Variable in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html" title="class in com.example.webappinitializer.component">WizardView</a></dt>
-<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
@@ -143,7 +141,9 @@ loadScripts(document, 'script');</script>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/util/EventType.html#GET_STARTED_BUTTON_CLICKED" class="member-name-link">GET_STARTED_BUTTON_CLICKED</a> - Enum constant in enum class com.example.webappinitializer.util.<a href="com.example.webappinitializer/com/example/webappinitializer/util/EventType.html" title="enum class in com.example.webappinitializer.util">EventType</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/config/ProjectConfigurationManager.html#getConfiguration()" class="member-name-link">getConfiguration()</a> - Method in class com.example.webappinitializer.config.<a href="com.example.webappinitializer/com/example/webappinitializer/config/ProjectConfigurationManager.html" title="class in com.example.webappinitializer.config">ProjectConfigurationManager</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Gets the configuration of the project.</div>
+</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/StepView.html#getDescription()" class="member-name-link">getDescription()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/StepView.html" title="class in com.example.webappinitializer.component">StepView</a></dt>
 <dd>
 <div class="block">Gets the value of the <code>description</code> property.</div>
@@ -172,6 +172,10 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/config/PrettierConfiguration.html#getTrailingComma()" class="member-name-link">getTrailingComma()</a> - Method in class com.example.webappinitializer.config.<a href="com.example.webappinitializer/com/example/webappinitializer/config/PrettierConfiguration.html" title="class in com.example.webappinitializer.config">PrettierConfiguration</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html#goToNextStep()" class="member-name-link">goToNextStep()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html" title="class in com.example.webappinitializer.component">StepContainer</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html#goToPreviousStep()" class="member-name-link">goToPreviousStep()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html" title="class in com.example.webappinitializer.component">StepContainer</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:H">H</h2>
 <dl class="index">
@@ -189,7 +193,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardNavigationBar.html#hideBackButton()" class="member-name-link">hideBackButton()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardNavigationBar.html" title="class in com.example.webappinitializer.component">WizardNavigationBar</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html#hideInactiveSteps()" class="member-name-link">hideInactiveSteps()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html" title="class in com.example.webappinitializer.component">WizardView</a></dt>
+<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html#hideInactiveSteps()" class="member-name-link">hideInactiveSteps()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html" title="class in com.example.webappinitializer.component">StepContainer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardNavigationBar.html#hideNextButton()" class="member-name-link">hideNextButton()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardNavigationBar.html" title="class in com.example.webappinitializer.component">WizardNavigationBar</a></dt>
 <dd>&nbsp;</dd>
@@ -216,9 +220,9 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/config/PrettierConfiguration.html#isBracketSpacing()" class="member-name-link">isBracketSpacing()</a> - Method in class com.example.webappinitializer.config.<a href="com.example.webappinitializer/com/example/webappinitializer/config/PrettierConfiguration.html" title="class in com.example.webappinitializer.config">PrettierConfiguration</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html#isOnFirstStep()" class="member-name-link">isOnFirstStep()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html" title="class in com.example.webappinitializer.component">WizardView</a></dt>
+<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html#isOnFirstStep()" class="member-name-link">isOnFirstStep()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html" title="class in com.example.webappinitializer.component">StepContainer</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html#isOnLastStep()" class="member-name-link">isOnLastStep()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html" title="class in com.example.webappinitializer.component">WizardView</a></dt>
+<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html#isOnLastStep()" class="member-name-link">isOnLastStep()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html" title="class in com.example.webappinitializer.component">StepContainer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/config/PrettierConfiguration.html#isSemi()" class="member-name-link">isSemi()</a> - Method in class com.example.webappinitializer.config.<a href="com.example.webappinitializer/com/example/webappinitializer/config/PrettierConfiguration.html" title="class in com.example.webappinitializer.config">PrettierConfiguration</a></dt>
 <dd>&nbsp;</dd>
@@ -339,7 +343,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/config/ProjectConfiguration.html#removeModule(com.example.webappinitializer.util.Module)" class="member-name-link">removeModule(Module)</a> - Method in class com.example.webappinitializer.config.<a href="com.example.webappinitializer/com/example/webappinitializer/config/ProjectConfiguration.html" title="class in com.example.webappinitializer.config">ProjectConfiguration</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html#removeStep(com.example.webappinitializer.component.StepView)" class="member-name-link">removeStep(StepView)</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html" title="class in com.example.webappinitializer.component">WizardView</a></dt>
+<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html#removeStep(com.example.webappinitializer.component.StepView)" class="member-name-link">removeStep(StepView)</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html" title="class in com.example.webappinitializer.component">StepContainer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/util/ProjectInitializer.html#runPrettier(java.io.File)" class="member-name-link">runPrettier(File)</a> - Static method in class com.example.webappinitializer.util.<a href="com.example.webappinitializer/com/example/webappinitializer/util/ProjectInitializer.html" title="class in com.example.webappinitializer.util">ProjectInitializer</a></dt>
 <dd>&nbsp;</dd>
@@ -388,11 +392,15 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardNavigationBar.html#showBackButton()" class="member-name-link">showBackButton()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardNavigationBar.html" title="class in com.example.webappinitializer.component">WizardNavigationBar</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html#showCurrentStep()" class="member-name-link">showCurrentStep()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardView.html" title="class in com.example.webappinitializer.component">WizardView</a></dt>
+<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html#showCurrentStep()" class="member-name-link">showCurrentStep()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html" title="class in com.example.webappinitializer.component">StepContainer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardNavigationBar.html#showNextButton()" class="member-name-link">showNextButton()</a> - Method in class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/WizardNavigationBar.html" title="class in com.example.webappinitializer.component">WizardNavigationBar</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/WizardApplication.html#start(javafx.stage.Stage)" class="member-name-link">start(Stage)</a> - Method in class com.example.webappinitializer.<a href="com.example.webappinitializer/com/example/webappinitializer/WizardApplication.html" title="class in com.example.webappinitializer">WizardApplication</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html" class="type-name-link" title="class in com.example.webappinitializer.component">StepContainer</a> - Class in <a href="com.example.webappinitializer/com/example/webappinitializer/component/package-summary.html">com.example.webappinitializer.component</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html#%3Cinit%3E()" class="member-name-link">StepContainer()</a> - Constructor for class com.example.webappinitializer.component.<a href="com.example.webappinitializer/com/example/webappinitializer/component/StepContainer.html" title="class in com.example.webappinitializer.component">StepContainer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.example.webappinitializer/com/example/webappinitializer/component/StepDescriptionLabel.html" class="type-name-link" title="class in com.example.webappinitializer.component">StepDescriptionLabel</a> - Class in <a href="com.example.webappinitializer/com/example/webappinitializer/component/package-summary.html">com.example.webappinitializer.component</a></dt>
 <dd>&nbsp;</dd>
