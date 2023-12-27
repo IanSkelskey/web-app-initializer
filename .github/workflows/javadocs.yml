@@ -17,6 +17,9 @@ jobs:
           java-version: '18'  # or your project's JDK version
           distribution: 'adopt'
 
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
       - name: Generate JavaDoc with Gradle
         run: ./gradlew javadoc
 
