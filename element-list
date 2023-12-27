@@ -1,0 +1,8 @@
+module:com.example.webappinitializer
+com.example.webappinitializer
+com.example.webappinitializer.alert
+com.example.webappinitializer.component
+com.example.webappinitializer.config
+com.example.webappinitializer.controller
+com.example.webappinitializer.form
+com.example.webappinitializer.util
