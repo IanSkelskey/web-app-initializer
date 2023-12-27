@@ -111,7 +111,6 @@ public class ProjectConfiguration {
 
     /**
      * @param module The module to check.
-     * @return Whether the module is selected.
      */
     public void setModuleConfiguration(Module module, ModuleConfiguration config) {
         this.modules.put(module, config);
