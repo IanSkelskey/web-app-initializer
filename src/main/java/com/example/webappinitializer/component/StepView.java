@@ -40,4 +40,9 @@ public class StepView extends BorderPane {
     public void setDescription(String description) {
         this.description.set(description);
     }
+
+    @Override
+    public String toString() {
+        return "Step Name: " + getName() + "\nStep Description: " + getDescription() + "\n";
+    }
 }

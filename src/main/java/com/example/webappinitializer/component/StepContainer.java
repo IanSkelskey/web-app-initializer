@@ -20,6 +20,7 @@ public class StepContainer extends StackPane {
         getChildren().addAll(introSteps);
         getChildren().addAll(outroSteps);
         updateUI();
+        EventManager.publish(EventType.STEP_COUNT_CHANGED, getSteps().size());
         EventManager.subscribe(EventType.BACK_BUTTON_CLICKED, (event) -> goToPreviousStep());
         EventManager.subscribe(EventType.NEXT_BUTTON_CLICKED, (event) -> goToNextStep());
     }
@@ -33,21 +34,17 @@ public class StepContainer extends StackPane {
     }
 
     public void addStep(StepView step) {
-        System.out.println("Adding step: " + step.getName());
-        System.out.println("Total steps: " + getSteps().size());
         steps.add(step);
         replaceAllSteps(getSteps());
         updateUI();
-        EventManager.publish(EventType.STEP_CHANGED, currentStep);
+        EventManager.publish(EventType.STEP_COUNT_CHANGED, getSteps().size());
     }
 
     public void removeStep(StepView step) {
-        System.out.println("Removing step: " + step.getName());
-        System.out.println("Total steps: " + getSteps().size());
         steps.remove(step);
         replaceAllSteps(getSteps());
         updateUI();
-        EventManager.publish(EventType.STEP_CHANGED, currentStep);
+        EventManager.publish(EventType.STEP_COUNT_CHANGED, getSteps().size());
     }
 
     public void showCurrentStep() {

@@ -12,10 +12,19 @@ import static javafx.geometry.Pos.CENTER;
 
 public class WizardNavigationBar extends HBox {
 
+    private int currentStep = 0;
+    private int stepCount = 0;
+
     public WizardNavigationBar() {
         super();
         EventManager.subscribe(EventType.STEP_CHANGED, (step) -> {
-            updateButtons((int) step);
+            currentStep = (int) step;
+            updateButtons();
+        });
+
+        EventManager.subscribe(EventType.STEP_COUNT_CHANGED, (stepCount) -> {
+            this.stepCount = (int) stepCount;
+            updateButtons();
         });
 
         initHomeButton();
@@ -26,13 +35,13 @@ public class WizardNavigationBar extends HBox {
         setPadding(new Insets(10));
     }
 
-    private void updateButtons(int step) {
-        if (step == 0) {
+    private void updateButtons() {
+        if (currentStep == 0) {
             hideBackButton();
         } else {
             showBackButton();
         }
-        if (step == 2) {
+        if (currentStep == stepCount - 1) {
             hideNextButton();
         } else {
             showNextButton();
