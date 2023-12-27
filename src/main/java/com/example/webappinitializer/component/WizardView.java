@@ -8,68 +8,48 @@ import com.example.webappinitializer.util.ProjectInitializer;
 import javafx.scene.layout.BorderPane;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class WizardView extends BorderPane {
 
     private final ProjectConfigurationManager projectConfigurationManager = new ProjectConfigurationManager();
 
     private final WizardNavigationBar navigationBar = new WizardNavigationBar();
-    private final StepContainer stepsContainer = new StepContainer();
 
     private final NameAndDescriptionView nameAndDescriptionView = new NameAndDescriptionView();
+    private final StepContainer stepsContainer;
+
     private final ModuleSelectionView moduleSelectionView = new ModuleSelectionView();
     private final TailwindConfigurationView tailwindConfigurationView = new TailwindConfigurationView();
     private final PrettierConfigurationView prettierConfigurationView = new PrettierConfigurationView();
     private final ConfigurationSummaryView configurationSummaryView = new ConfigurationSummaryView();
 
+    private final Map<Module, ModuleConfigurationView> moduleConfigurationViewMap = Map.of(
+        Module.TAILWIND_CSS, tailwindConfigurationView,
+        Module.PRETTIER, prettierConfigurationView
+    );
+
     public WizardView() {
         super();
-        tailwindConfigurationView.setVisible(false);
-        prettierConfigurationView.setVisible(false);
-        stepsContainer.addStep(nameAndDescriptionView);
-        stepsContainer.addStep(moduleSelectionView);
-        stepsContainer.addStep(configurationSummaryView);
+        ArrayList<StepView> introSteps = new ArrayList<>();
+        introSteps.add(nameAndDescriptionView);
+        introSteps.add(moduleSelectionView);
+        ArrayList<StepView> outroSteps = new ArrayList<>();
+        outroSteps.add(configurationSummaryView);
+        stepsContainer = new StepContainer(introSteps, outroSteps);
 
         EventManager.subscribe(EventType.CREATE_APP_BUTTON_CLICKED, (event) -> handleCreateAppButtonClicked());
         EventManager.subscribe(EventType.MODULE_SELECTED, (module) -> {
-            if (module == Module.TAILWIND_CSS) {
-                stepsContainer.addStep(tailwindConfigurationView);
-            } else if (module == Module.PRETTIER) {
-                stepsContainer.addStep(prettierConfigurationView);
-            }
-            updateUI();
+            stepsContainer.addStep(moduleConfigurationViewMap.get((Module) module));
         });
 
         EventManager.subscribe(EventType.MODULE_DESELECTED, (module) -> {
-            if (module == Module.TAILWIND_CSS) {
-                stepsContainer.removeStep(tailwindConfigurationView);
-            } else if (module == Module.PRETTIER) {
-                stepsContainer.removeStep(prettierConfigurationView);
-            }
-            updateUI();
+            stepsContainer.removeStep(moduleConfigurationViewMap.get((Module) module));
         });
 
         setTop(navigationBar);
         setCenter(stepsContainer);
-        updateUI();
-    }
-
-    public void updateButtons() {
-        if (stepsContainer.isOnFirstStep()) {
-            navigationBar.hideBackButton();
-        } else {
-            navigationBar.showBackButton();
-        }
-
-        if (stepsContainer.isOnLastStep()) {
-            navigationBar.hideNextButton();
-        } else {
-            navigationBar.showNextButton();
-        }
-    }
-
-    public void updateUI() {
-        updateButtons();
     }
 
 

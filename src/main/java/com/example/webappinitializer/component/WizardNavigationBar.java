@@ -15,23 +15,28 @@ public class WizardNavigationBar extends HBox {
     public WizardNavigationBar() {
         super();
         EventManager.subscribe(EventType.STEP_CHANGED, (step) -> {
-            if ((int) step == 0) {
-                hideBackButton();
-            } else {
-                showBackButton();
-            }
-            if ((int) step == 2) {
-                hideNextButton();
-            } else {
-                showNextButton();
-            }
+            updateButtons((int) step);
         });
+
         initHomeButton();
         initBackButton();
         initNextButton();
         setAlignment(CENTER);
         setSpacing(10);
         setPadding(new Insets(10));
+    }
+
+    private void updateButtons(int step) {
+        if (step == 0) {
+            hideBackButton();
+        } else {
+            showBackButton();
+        }
+        if (step == 2) {
+            hideNextButton();
+        } else {
+            showNextButton();
+        }
     }
 
     private void initHomeButton() {

@@ -9,52 +9,82 @@ import java.util.ArrayList;
 public class StepContainer extends StackPane {
 
     private int currentStep = 0;
+    private final ArrayList<StepView> introSteps = new ArrayList<>();
     private final ArrayList<StepView> steps = new ArrayList<>();
+    private final ArrayList<StepView> outroSteps = new ArrayList<>();
 
-    public StepContainer() {
+    public StepContainer(ArrayList<StepView> introSteps, ArrayList<StepView> outroSteps) {
         super();
+        this.introSteps.addAll(introSteps);
+        this.outroSteps.addAll(outroSteps);
+        getChildren().addAll(introSteps);
+        getChildren().addAll(outroSteps);
+        updateUI();
         EventManager.subscribe(EventType.BACK_BUTTON_CLICKED, (event) -> goToPreviousStep());
         EventManager.subscribe(EventType.NEXT_BUTTON_CLICKED, (event) -> goToNextStep());
     }
 
+    private ArrayList<StepView> getSteps() {
+        ArrayList<StepView> masterSteps = new ArrayList<>();
+        masterSteps.addAll(introSteps);
+        masterSteps.addAll(steps);
+        masterSteps.addAll(outroSteps);
+        return masterSteps;
+    }
+
     public void addStep(StepView step) {
+        System.out.println("Adding step: " + step.getName());
+        System.out.println("Total steps: " + getSteps().size());
         steps.add(step);
-        getChildren().add(step);
+        replaceAllSteps(getSteps());
         updateUI();
+        EventManager.publish(EventType.STEP_CHANGED, currentStep);
     }
 
     public void removeStep(StepView step) {
+        System.out.println("Removing step: " + step.getName());
+        System.out.println("Total steps: " + getSteps().size());
         steps.remove(step);
-        getChildren().remove(step);
+        replaceAllSteps(getSteps());
         updateUI();
+        EventManager.publish(EventType.STEP_CHANGED, currentStep);
     }
 
     public void showCurrentStep() {
-        steps.get(currentStep).setVisible(true);
+        getSteps().get(currentStep).setVisible(true);
     }
 
     public void hideInactiveSteps() {
-        for (int i = 0; i < steps.size(); i++) {
+        for (int i = 0; i < getSteps().size(); i++) {
             if (i != currentStep) {
-                steps.get(i).setVisible(false);
+                getSteps().get(i).setVisible(false);
             }
         }
     }
 
+    private void replaceAllSteps(ArrayList<StepView> steps) {
+        getChildren().remove(0, getChildren().size());
+        getChildren().addAll(steps);
+    }
+
     public void goToNextStep() {
-        if (currentStep < steps.size() - 1) {
-            currentStep++;
-            updateUI();
-            EventManager.publish(EventType.STEP_CHANGED, currentStep);
+        if (isOnLastStep()) {
+            return;
         }
+        currentStep++;
+        updateUI();
+        EventManager.publish(EventType.STEP_CHANGED, currentStep);
+
     }
 
     public void goToPreviousStep() {
-        if (currentStep > 0) {
-            currentStep--;
-            updateUI();
-            EventManager.publish(EventType.STEP_CHANGED, currentStep);
+        if (isOnFirstStep()) {
+            return;
         }
+        currentStep--;
+        updateUI();
+        EventManager.publish(EventType.STEP_CHANGED, currentStep);
+
     }
 
     public boolean isOnFirstStep() {
@@ -62,7 +92,7 @@ public class StepContainer extends StackPane {
     }
 
     public boolean isOnLastStep() {
-        return currentStep == steps.size() - 1;
+        return currentStep == getSteps().size() - 1;
     }
 
     private void updateUI() {
@@ -71,6 +101,6 @@ public class StepContainer extends StackPane {
     }
 
     public StepView getCurrentStep() {
-        return steps.get(currentStep);
+        return getSteps().get(currentStep);
     }
 }
