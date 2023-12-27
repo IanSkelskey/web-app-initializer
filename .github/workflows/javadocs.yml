@@ -11,20 +11,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up JDK 11
+      - name: Set up JDK 18
         uses: actions/setup-java@v2
         with:
-          java-version: '11'  # or your project's JDK version
+          java-version: '18'  # or your project's JDK version
           distribution: 'adopt'
 
-      - name: Generate JavaDoc
-        run: |
-          mkdir javadoc
-          javadoc -d javadoc $(find . -type f -name '*.java')  # Update command as per your project structure
+      - name: Generate JavaDoc with Gradle
+        run: ./gradlew javadoc
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./javadoc
+          publish_dir: ./build/docs/javadoc  # Gradle JavaDoc output directory
           publish_branch: javadocs  # Target branch
