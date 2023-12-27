@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import com.example.webappinitializer.view.StepView?>
+<?import com.example.webappinitializer.component.StepView?>
 <StepView xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="com.example.webappinitializer.controller.ModuleSelectionViewController"

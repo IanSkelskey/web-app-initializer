@@ -12,7 +12,7 @@ public class WizardApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(WizardApplication.class.getResource("wizard-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 400, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 500, 600);
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         final String TITLE = "React Wizard";
         stage.setTitle(TITLE);

@@ -1,4 +1,4 @@
-package com.example.webappinitializer.view;
+package com.example.webappinitializer.component;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -9,8 +9,9 @@ public class StepView extends VBox {
     private final StringProperty description = new SimpleStringProperty(this, "description");
 
     public StepView() {
-        // set the padding to 20 all around
-        setStyle("-fx-padding: 20;");
+        StepTitleLabel titleLabel = new StepTitleLabel(getName());
+        titleLabel.prefWidthProperty().bind(widthProperty());
+        getChildren().add(titleLabel);
     }
 
     public String getName() {

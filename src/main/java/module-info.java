@@ -11,7 +11,7 @@ module com.example.webappinitializer {
     opens com.example.webappinitializer to javafx.fxml;
     exports com.example.webappinitializer;
     exports com.example.webappinitializer.controller;
-    exports com.example.webappinitializer.view to javafx.fxml;
-    opens com.example.webappinitializer.view to javafx.fxml;
+    exports com.example.webappinitializer.component to javafx.fxml;
+    opens com.example.webappinitializer.component to javafx.fxml;
     opens com.example.webappinitializer.controller to javafx.fxml;
 }

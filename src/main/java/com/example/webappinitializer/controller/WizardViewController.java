@@ -5,7 +5,7 @@ import com.example.webappinitializer.util.EventManager;
 import com.example.webappinitializer.config.ProjectConfiguration;
 import com.example.webappinitializer.util.Modules;
 import com.example.webappinitializer.util.ProjectInitializer;
-import com.example.webappinitializer.view.StepView;
+import com.example.webappinitializer.component.StepView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -36,10 +36,6 @@ public class WizardViewController {
     public StepView moduleSelectionView;
     public StepView tailwindConfigurationView;
     public StepView prettierConfigurationView;
-    public BreadCrumbBar<String> breadCrumbBar;
-
-    public Label stepTitleLabel;
-    public Label stepDescriptionLabel;
 
     @FXML
     protected void initialize() {
@@ -47,10 +43,6 @@ public class WizardViewController {
             homeView.setVisible(false);
             steps.get(0).setVisible(true);
             nextButton.setVisible(true);
-            stepTitleLabel.setVisible(true);
-            stepDescriptionLabel.setVisible(true);
-            stepTitleLabel.setText(steps.get(0).getName());
-            stepDescriptionLabel.setText(steps.get(0).getDescription());
         });
 
         EventManager.subscribe("module-selected", (module) -> {
@@ -105,19 +97,6 @@ public class WizardViewController {
             projectConfiguration.setModuleConfiguration(Modules.PRETTIER, (PrettierConfiguration) config);
         });
 
-
-        stepTitleLabel.setBackground(new Background(new BackgroundFill(javafx.scene.paint.Color.web("#3379b7"), null, null)));
-        stepTitleLabel.setTextFill(javafx.scene.paint.Color.WHITE);
-        stepTitleLabel.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
-        stepTitleLabel.prefWidthProperty().bind(stepsContainer.widthProperty());
-        stepTitleLabel.setText(nameAndDescriptionView.getName());
-
-        stepTitleLabel.setVisible(false);
-
-        stepDescriptionLabel.setText(nameAndDescriptionView.getDescription());
-        stepDescriptionLabel.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
-        stepDescriptionLabel.setVisible(false);
-
         steps.add(nameAndDescriptionView);
         steps.add(moduleSelectionView);
 
@@ -131,10 +110,6 @@ public class WizardViewController {
         steps.get(currentStep).setVisible(false);
         steps.get(currentStep + 1).setVisible(true);
         currentStep++;
-        stepTitleLabel.setVisible(true);
-        stepDescriptionLabel.setVisible(true);
-        stepTitleLabel.setText(steps.get(currentStep).getName());
-        stepDescriptionLabel.setText(steps.get(currentStep).getDescription());
         if (currentStep == steps.size() - 1) {
             nextButton.setVisible(false);
             createAppButton.setVisible(true);
@@ -155,10 +130,7 @@ public class WizardViewController {
         steps.get(currentStep).setVisible(false);
         steps.get(currentStep - 1).setVisible(true);
         currentStep--;
-        stepTitleLabel.setVisible(true);
-        stepDescriptionLabel.setVisible(true);
-        stepTitleLabel.setText(steps.get(currentStep).getName());
-        stepDescriptionLabel.setText(steps.get(currentStep).getDescription());
+
         if (currentStep < steps.size() - 1) {
             nextButton.setVisible(true);
             createAppButton.setVisible(false);
