@@ -22,6 +22,7 @@ public class WizardView extends BorderPane {
     private final ModuleSelectionView moduleSelectionView = new ModuleSelectionView();
     private final TailwindConfigurationView tailwindConfigurationView = new TailwindConfigurationView();
     private final PrettierConfigurationView prettierConfigurationView = new PrettierConfigurationView();
+    private final ConfigurationSummaryView configurationSummaryView = new ConfigurationSummaryView();
 
     public void showCurrentStep() {
         steps.get(currentStep).setVisible(true);
@@ -41,6 +42,7 @@ public class WizardView extends BorderPane {
         prettierConfigurationView.setVisible(false);
         addStep(nameAndDescriptionView);
         addStep(moduleSelectionView);
+        addStep(configurationSummaryView);
         EventManager.subscribe("backButtonClicked", (event) -> handleBackButtonClicked());
         EventManager.subscribe("nextButtonClicked", (event) -> handleNextButtonClicked());
         EventManager.subscribe("createAppButtonClicked", (event) -> handleCreateAppButtonClicked());
@@ -76,10 +78,8 @@ public class WizardView extends BorderPane {
 
         if (isOnLastStep()) {
             navigationBar.hideNextButton();
-            navigationBar.showCreateAppButton();
         } else {
             navigationBar.showNextButton();
-            navigationBar.hideCreateAppButton();
         }
     }
 
@@ -98,14 +98,21 @@ public class WizardView extends BorderPane {
     }
 
     public void addStep(StepView step) {
-        steps.add(step);
-        stepsContainer.getChildren().add(step);
+        if (!steps.contains(configurationSummaryView)) {
+            steps.add(configurationSummaryView); // Add summary view at the end if not already present
+        }
+        int summaryIndex = steps.indexOf(configurationSummaryView);
+        steps.add(summaryIndex, step); // Add new step before summary step
+        stepsContainer.getChildren().add(summaryIndex, step);
     }
 
     public void removeStep(StepView step) {
-        steps.remove(step);
-        stepsContainer.getChildren().remove(step);
+        if (step != configurationSummaryView) { // Prevent removing summary view
+            steps.remove(step);
+            stepsContainer.getChildren().remove(step);
+        }
     }
+
 
     private void handleBackButtonClicked() {
         if (isOnFirstStep()) {

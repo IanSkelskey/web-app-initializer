@@ -15,7 +15,6 @@ public class WizardNavigationBar extends HBox {
         super();
         initHomeButton();
         initBackButton();
-        initCreateAppButton();
         initNextButton();
         setAlignment(CENTER);
         setSpacing(10);
@@ -39,13 +38,6 @@ public class WizardNavigationBar extends HBox {
         getChildren().add(backButton);
     }
 
-    private void initCreateAppButton() {
-        Button createAppButton = new Button("Create App");
-        createAppButton.setOnAction(event -> EventManager.publish("createAppButtonClicked", null));
-        createAppButton.getStyleClass().addAll("btn-primary", "btn-lg");
-        getChildren().add(createAppButton);
-    }
-
     private void initNextButton() {
         Button nextButton = new Button("Next");
         nextButton.setOnAction(event -> EventManager.publish("nextButtonClicked", null));
@@ -54,18 +46,10 @@ public class WizardNavigationBar extends HBox {
     }
 
     public void hideBackButton() {
-        getChildren().get(0).setVisible(false);
-    }
-
-    public void showBackButton() {
-        getChildren().get(0).setVisible(true);
-    }
-
-    public void hideCreateAppButton() {
         getChildren().get(1).setVisible(false);
     }
 
-    public void showCreateAppButton() {
+    public void showBackButton() {
         getChildren().get(1).setVisible(true);
     }
 

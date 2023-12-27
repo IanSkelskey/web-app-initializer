@@ -29,30 +29,39 @@ public class ProjectConfigurationManager {
     private void subscribeToConfigurationChangeEvents() {
         EventManager.subscribe("directoryNameChanged", (newName) -> {
             configuration.setDirectoryName((String) newName);
+            EventManager.publish("projectConfigurationUpdated", configuration);
         });
 
         EventManager.subscribe("appShortNameChanged", (newName) -> {
             configuration.setShortName((String) newName);
+            EventManager.publish("projectConfigurationUpdated", configuration);
         });
 
         EventManager.subscribe("appFullNameChanged", (newName) -> {
             configuration.setFullName((String) newName);
+            EventManager.publish("projectConfigurationUpdated", configuration);
         });
 
         EventManager.subscribe("appDescriptionChanged", (newDescription) -> {
             configuration.setDescription((String) newDescription);
+            EventManager.publish("projectConfigurationUpdated", configuration);
         });
 
-        EventManager.subscribe("pretterConfigChanged", (newConfig) -> {
+        EventManager.subscribe("prettierConfigChanged", (newConfig) -> {
             configuration.setModuleConfiguration(Modules.PRETTIER, (PrettierConfiguration) newConfig);
+            EventManager.publish("projectConfigurationUpdated", configuration);
         });
 
         EventManager.subscribe("module-selected", (module) -> {
+            System.out.println("module selected: " + module);
             configuration.addModule((Modules) module);
+            EventManager.publish("projectConfigurationUpdated", configuration);
         });
 
         EventManager.subscribe("module-deselected", (module) -> {
+            System.out.println("module deselected: " + module);
             configuration.removeModule((Modules) module);
+            EventManager.publish("projectConfigurationUpdated", configuration);
         });
     }
 
@@ -62,6 +71,10 @@ public class ProjectConfigurationManager {
      */
     public void buildProject(File destinationDirectory) {
         ProjectBuilder.build(configuration, destinationDirectory);
+    }
+
+    public ProjectConfiguration getConfiguration() {
+        return configuration;
     }
 
 }
