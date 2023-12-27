@@ -87,6 +87,10 @@ public class ProjectConfigurationManager {
         ProjectBuilder.build(configuration, destinationDirectory);
     }
 
+    /**
+     * Gets the configuration of the project.
+     * @return The configuration of the project.
+     */
     public ProjectConfiguration getConfiguration() {
         return configuration;
     }
