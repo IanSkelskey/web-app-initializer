@@ -36,8 +36,6 @@ public class PrettierConfigurationForm extends VBox {
             handlePrettierConfigChange();
         });
 
-        handlePrettierConfigChange();
-
         ImageView logoImageView = new ImageView(logoImage);
         logoImageView.setFitHeight(100);
         logoImageView.setFitWidth(100);
@@ -62,6 +60,8 @@ public class PrettierConfigurationForm extends VBox {
         getChildren().add(tabWidthSpinner);
         getChildren().add(new Label("Print Width: "));
         getChildren().add(printWidthSpinner);
+
+        handlePrettierConfigChange();
 
     }
 

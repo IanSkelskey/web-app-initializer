@@ -8,12 +8,13 @@ module com.example.webappinitializer {
     requires com.google.gson;
     requires org.jsoup;
 
-    opens com.example.webappinitializer to javafx.fxml;
     exports com.example.webappinitializer;
     exports com.example.webappinitializer.controller;
     exports com.example.webappinitializer.component to javafx.fxml;
-    opens com.example.webappinitializer.component to javafx.fxml;
-    opens com.example.webappinitializer.controller to javafx.fxml;
     exports com.example.webappinitializer.form to javafx.fxml;
+
+    opens com.example.webappinitializer to javafx.fxml;
+    opens com.example.webappinitializer.controller to javafx.fxml;
+    opens com.example.webappinitializer.component to javafx.fxml;
     opens com.example.webappinitializer.form to javafx.fxml;
 }

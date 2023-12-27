@@ -19,7 +19,13 @@ public class WizardView extends BorderPane {
     private final ArrayList<StepView> steps = new ArrayList<>();
     private final WizardNavigationBar navigationBar = new WizardNavigationBar();
 
-    WizardView() {
+    public void hideAllStepsExceptFirst() {
+        for (int i = 1; i < steps.size(); i++) {
+            steps.get(i).setVisible(false);
+        }
+    }
+
+    public WizardView() {
         super();
         addStep(new NameAndDescriptionView());
         addStep(new ModuleSelectionView());
@@ -45,10 +51,10 @@ public class WizardView extends BorderPane {
         EventManager.subscribe("module-deselected", (module) -> {
             if (module == Modules.TAILWIND_CSS) {
                 projectConfiguration.removeModule(Modules.TAILWIND_CSS);
-                steps.remove(new TailwindConfigurationView());
+                removeStep(new TailwindConfigurationView());
             } else if (module == Modules.PRETTIER) {
                 projectConfiguration.removeModule(Modules.PRETTIER);
-                steps.remove(new PrettierConfigurationView());
+                removeStep(new PrettierConfigurationView());
             } else if (module == Modules.FRAMER_MOTION) {
                 projectConfiguration.removeModule(Modules.FRAMER_MOTION);
             }
@@ -80,6 +86,7 @@ public class WizardView extends BorderPane {
 
         setTop(navigationBar);
         setCenter(stepsContainer);
+        hideAllStepsExceptFirst();
     }
 
     public void addStep(StepView step) {
