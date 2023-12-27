@@ -97,6 +97,10 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ProjectBuilder</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">ProjectBuilder
+ <p>
+     This class is used to build a project based on the configuration.
+ </p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -127,7 +131,9 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#build(com.example.webappinitializer.config.ProjectConfiguration,java.io.File)" class="member-name-link">build</a><wbr>(<a href="../config/ProjectConfiguration.html" title="class in com.example.webappinitializer.config">ProjectConfiguration</a>&nbsp;config,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;destinationDirectory)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Build a project based on the configuration.</div>
+</div>
 </div>
 </div>
 </div>
@@ -164,6 +170,17 @@ loadScripts(document, 'script');</script>
 <h3>build</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">build</span><wbr><span class="parameters">(<a href="../config/ProjectConfiguration.html" title="class in com.example.webappinitializer.config">ProjectConfiguration</a>&nbsp;config,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;destinationDirectory)</span></div>
+<div class="block">Build a project based on the configuration.
+ <p>
+     This method uses the <a href="ProjectInitializer.html" title="class in com.example.webappinitializer.util"><code>ProjectInitializer</code></a> class to create a React app and update the files.
+     <br>
+     This method uses the <a href="../alert/BuildProgressAlert.html" title="class in com.example.webappinitializer.alert"><code>BuildProgressAlert</code></a> class to display a progress alert.
+ </p></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>config</code> - The project configuration.</dd>
+<dd><code>destinationDirectory</code> - The destination directory.</dd>
+</dl>
 </section>
 </li>
 </ul>

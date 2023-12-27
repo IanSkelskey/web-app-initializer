@@ -99,6 +99,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PrettierConfiguration</span>
 <span class="extends-implements">extends <a href="ModuleConfiguration.html" title="class in com.example.webappinitializer.config">ModuleConfiguration</a></span></div>
+<div class="block">This class represents the Prettier configuration.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -111,7 +112,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">PrettierConfiguration</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">This is the default constructor.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(boolean,boolean,boolean,java.lang.String,int,int,java.lang.String)" class="member-name-link">PrettierConfiguration</a><wbr>(boolean&nbsp;semi,
  boolean&nbsp;singleQuote,
  boolean&nbsp;bracketSpacing,
@@ -119,7 +122,9 @@ loadScripts(document, 'script');</script>
  int&nbsp;tabWidth,
  int&nbsp;printWidth,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endOfLine)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">This is the constructor for the Prettier configuration.</div>
+</div>
 </div>
 </section>
 </li>
@@ -203,6 +208,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>PrettierConfiguration</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PrettierConfiguration</span>()</div>
+<div class="block">This is the default constructor.</div>
 </section>
 </li>
 <li>
@@ -215,6 +221,17 @@ loadScripts(document, 'script');</script>
  int&nbsp;tabWidth,
  int&nbsp;printWidth,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endOfLine)</span></div>
+<div class="block">This is the constructor for the Prettier configuration.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>semi</code> - The semi flag.</dd>
+<dd><code>singleQuote</code> - The single quote flag.</dd>
+<dd><code>bracketSpacing</code> - The bracket spacing flag.</dd>
+<dd><code>trailingComma</code> - The trailing comma flag.</dd>
+<dd><code>tabWidth</code> - The tab width.</dd>
+<dd><code>printWidth</code> - The print width.</dd>
+<dd><code>endOfLine</code> - The end of line.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -229,84 +246,140 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isSemi()">
 <h3>isSemi</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isSemi</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The semi flag.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setSemi(boolean)">
 <h3>setSemi</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setSemi</span><wbr><span class="parameters">(boolean&nbsp;semi)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>semi</code> - The semi flag.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isSingleQuote()">
 <h3>isSingleQuote</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isSingleQuote</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The single quote flag.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setSingleQuote(boolean)">
 <h3>setSingleQuote</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setSingleQuote</span><wbr><span class="parameters">(boolean&nbsp;singleQuote)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>singleQuote</code> - The single quote flag.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isBracketSpacing()">
 <h3>isBracketSpacing</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isBracketSpacing</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The bracket spacing flag.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setBracketSpacing(boolean)">
 <h3>setBracketSpacing</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setBracketSpacing</span><wbr><span class="parameters">(boolean&nbsp;bracketSpacing)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>bracketSpacing</code> - The bracket spacing flag.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getTrailingComma()">
 <h3>getTrailingComma</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getTrailingComma</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The trailing comma flag.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setTrailingComma(java.lang.String)">
 <h3>setTrailingComma</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setTrailingComma</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;trailingComma)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>trailingComma</code> - The trailing comma flag.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getTabWidth()">
 <h3>getTabWidth</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getTabWidth</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The tab width.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setTabWidth(int)">
 <h3>setTabWidth</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setTabWidth</span><wbr><span class="parameters">(int&nbsp;tabWidth)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>tabWidth</code> - The tab width.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getPrintWidth()">
 <h3>getPrintWidth</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getPrintWidth</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The print width.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setPrintWidth(int)">
 <h3>setPrintWidth</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPrintWidth</span><wbr><span class="parameters">(int&nbsp;printWidth)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>printWidth</code> - The print width.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getEndOfLine()">
 <h3>getEndOfLine</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getEndOfLine</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The end of line.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setEndOfLine(java.lang.String)">
 <h3>setEndOfLine</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setEndOfLine</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endOfLine)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>endOfLine</code> - The end of line.</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -323,6 +396,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="toJson()">
 <h3>toJson</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">com.google.gson.JsonObject</span>&nbsp;<span class="element-name">toJson</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The JSON representation of the Prettier configuration.</dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -111,6 +111,11 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">WizardView</span>
 <span class="extends-implements">extends javafx.scene.layout.BorderPane</span></div>
+<div class="block">The main view for the wizard.
+ <p>
+ This class is used to manage the wizard.
+ It is used to add and remove steps, and to navigate between steps.
+ </p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -153,7 +158,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">WizardView</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructor</div>
+</div>
 </div>
 </section>
 </li>
@@ -170,7 +177,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#handleCreateAppButtonClicked()" class="member-name-link">handleCreateAppButtonClicked</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Handle the create app button clicked event.</div>
+</div>
 </div>
 </div>
 </div>
@@ -210,6 +219,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>WizardView</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">WizardView</span>()</div>
+<div class="block">Constructor</div>
 </section>
 </li>
 </ul>
@@ -224,6 +234,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="handleCreateAppButtonClicked()">
 <h3>handleCreateAppButtonClicked</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">handleCreateAppButtonClicked</span>()</div>
+<div class="block">Handle the create app button clicked event.
+ <p>
+     This method is called when the create app button is clicked.
+     It is used to create the project.
+     It calls the <a href="../config/ProjectConfigurationManager.html#buildProject(java.io.File)"><code>ProjectConfigurationManager.buildProject(File)</code></a> method.
+     It passes the selected directory to the <a href="../config/ProjectConfigurationManager.html#buildProject(java.io.File)"><code>ProjectConfigurationManager.buildProject(File)</code></a> method.
+     The selected directory is the directory where the project will be created.
+ </p></div>
 </section>
 </li>
 </ul>

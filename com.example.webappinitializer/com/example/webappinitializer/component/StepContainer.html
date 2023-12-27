@@ -111,6 +111,11 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">StepContainer</span>
 <span class="extends-implements">extends javafx.scene.layout.StackPane</span></div>
+<div class="block">A container for all the steps in the wizard.
+ <p>
+ This class is used to manage the steps in the wizard.
+ It is used to add and remove steps, and to navigate between steps.
+ </p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -154,7 +159,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.ArrayList,java.util.ArrayList)" class="member-name-link">StepContainer</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="StepView.html" title="class in com.example.webappinitializer.component">StepView</a>&gt;&nbsp;introSteps,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="StepView.html" title="class in com.example.webappinitializer.component">StepView</a>&gt;&nbsp;outroSteps)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructor</div>
+</div>
 </div>
 </section>
 </li>
@@ -171,19 +178,27 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addStep(com.example.webappinitializer.component.StepView)" class="member-name-link">addStep</a><wbr>(<a href="StepView.html" title="class in com.example.webappinitializer.component">StepView</a>&nbsp;step)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Add a step to the wizard.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="StepView.html" title="class in com.example.webappinitializer.component">StepView</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCurrentStep()" class="member-name-link">getCurrentStep</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#goToNextStep()" class="member-name-link">goToNextStep</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Go to the next step in the wizard.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#goToPreviousStep()" class="member-name-link">goToPreviousStep</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Go to the previous step in the wizard.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hideInactiveSteps()" class="member-name-link">hideInactiveSteps</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Hide all the steps except the current step.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isOnFirstStep()" class="member-name-link">isOnFirstStep</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -192,10 +207,14 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeStep(com.example.webappinitializer.component.StepView)" class="member-name-link">removeStep</a><wbr>(<a href="StepView.html" title="class in com.example.webappinitializer.component">StepView</a>&nbsp;step)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Remove a step from the wizard.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showCurrentStep()" class="member-name-link">showCurrentStep</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Show the current step.</div>
+</div>
 </div>
 </div>
 </div>
@@ -236,6 +255,12 @@ loadScripts(document, 'script');</script>
 <h3>StepContainer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">StepContainer</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="StepView.html" title="class in com.example.webappinitializer.component">StepView</a>&gt;&nbsp;introSteps,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="StepView.html" title="class in com.example.webappinitializer.component">StepView</a>&gt;&nbsp;outroSteps)</span></div>
+<div class="block">Constructor</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>introSteps</code> - The steps to be shown at the beginning of the wizard.</dd>
+<dd><code>outroSteps</code> - The steps to be shown at the end of the wizard.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -250,54 +275,80 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="addStep(com.example.webappinitializer.component.StepView)">
 <h3>addStep</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addStep</span><wbr><span class="parameters">(<a href="StepView.html" title="class in com.example.webappinitializer.component">StepView</a>&nbsp;step)</span></div>
+<div class="block">Add a step to the wizard.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>step</code> - The step to add.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="removeStep(com.example.webappinitializer.component.StepView)">
 <h3>removeStep</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeStep</span><wbr><span class="parameters">(<a href="StepView.html" title="class in com.example.webappinitializer.component">StepView</a>&nbsp;step)</span></div>
+<div class="block">Remove a step from the wizard.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>step</code> - The step to remove.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="showCurrentStep()">
 <h3>showCurrentStep</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">showCurrentStep</span>()</div>
+<div class="block">Show the current step.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="hideInactiveSteps()">
 <h3>hideInactiveSteps</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">hideInactiveSteps</span>()</div>
+<div class="block">Hide all the steps except the current step.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="goToNextStep()">
 <h3>goToNextStep</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">goToNextStep</span>()</div>
+<div class="block">Go to the next step in the wizard.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="goToPreviousStep()">
 <h3>goToPreviousStep</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">goToPreviousStep</span>()</div>
+<div class="block">Go to the previous step in the wizard.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="isOnFirstStep()">
 <h3>isOnFirstStep</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isOnFirstStep</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>True if the current step is the first step in the wizard.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isOnLastStep()">
 <h3>isOnLastStep</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isOnLastStep</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>True if the current step is the last step in the wizard.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getCurrentStep()">
 <h3>getCurrentStep</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="StepView.html" title="class in com.example.webappinitializer.component">StepView</a></span>&nbsp;<span class="element-name">getCurrentStep</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The current step.</dd>
+</dl>
 </section>
 </li>
 </ul>
