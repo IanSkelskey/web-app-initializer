@@ -19,26 +19,37 @@ public class WizardView extends BorderPane {
     private final ArrayList<StepView> steps = new ArrayList<>();
     private final WizardNavigationBar navigationBar = new WizardNavigationBar();
 
-    public void hideAllStepsExceptFirst() {
-        for (int i = 1; i < steps.size(); i++) {
-            steps.get(i).setVisible(false);
+    private final NameAndDescriptionView nameAndDescriptionView = new NameAndDescriptionView();
+    private final ModuleSelectionView moduleSelectionView = new ModuleSelectionView();
+    private final TailwindConfigurationView tailwindConfigurationView = new TailwindConfigurationView();
+    private final PrettierConfigurationView prettierConfigurationView = new PrettierConfigurationView();
+
+    public void showCurrentStep() {
+        steps.get(currentStep).setVisible(true);
+    }
+
+    public void hideInactiveSteps() {
+        for (int i = 0; i < steps.size(); i++) {
+            if (i != currentStep) {
+                steps.get(i).setVisible(false);
+            }
         }
     }
 
     public WizardView() {
         super();
-        addStep(new NameAndDescriptionView());
-        addStep(new ModuleSelectionView());
+        addStep(nameAndDescriptionView);
+        addStep(moduleSelectionView);
         EventManager.subscribe("backButtonClicked", (event) -> handleBackButtonClicked());
         EventManager.subscribe("nextButtonClicked", (event) -> handleNextButtonClicked());
         EventManager.subscribe("createAppButtonClicked", (event) -> handleCreateAppButtonClicked());
         EventManager.subscribe("module-selected", (module) -> {
             if (module == Modules.TAILWIND_CSS) {
                 projectConfiguration.addModule(Modules.TAILWIND_CSS);
-                steps.add(new TailwindConfigurationView());
+                steps.add(tailwindConfigurationView);
             } else if (module == Modules.PRETTIER) {
                 projectConfiguration.addModule(Modules.PRETTIER);
-                steps.add(new PrettierConfigurationView());
+                steps.add(prettierConfigurationView);
             } else if (module == Modules.FRAMER_MOTION) {
                 projectConfiguration.addModule(Modules.FRAMER_MOTION);
             }
@@ -51,10 +62,10 @@ public class WizardView extends BorderPane {
         EventManager.subscribe("module-deselected", (module) -> {
             if (module == Modules.TAILWIND_CSS) {
                 projectConfiguration.removeModule(Modules.TAILWIND_CSS);
-                removeStep(new TailwindConfigurationView());
+                removeStep(tailwindConfigurationView);
             } else if (module == Modules.PRETTIER) {
                 projectConfiguration.removeModule(Modules.PRETTIER);
-                removeStep(new PrettierConfigurationView());
+                removeStep(prettierConfigurationView);
             } else if (module == Modules.FRAMER_MOTION) {
                 projectConfiguration.removeModule(Modules.FRAMER_MOTION);
             }
@@ -86,7 +97,8 @@ public class WizardView extends BorderPane {
 
         setTop(navigationBar);
         setCenter(stepsContainer);
-        hideAllStepsExceptFirst();
+        hideInactiveSteps();
+        showCurrentStep();
     }
 
     public void addStep(StepView step) {
@@ -114,6 +126,9 @@ public class WizardView extends BorderPane {
             navigationBar.hideCreateAppButton();
         }
 
+        hideInactiveSteps();
+        showCurrentStep();
+
     }
 
     private void handleNextButtonClicked() {
@@ -130,6 +145,9 @@ public class WizardView extends BorderPane {
             navigationBar.hideNextButton();
             navigationBar.showCreateAppButton();
         }
+
+        hideInactiveSteps();
+        showCurrentStep();
     }
 
     public void handleCreateAppButtonClicked() {
