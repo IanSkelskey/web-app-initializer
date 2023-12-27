@@ -4,6 +4,8 @@ import com.example.webappinitializer.util.EventManager;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import static javafx.geometry.Pos.CENTER;
 
@@ -11,12 +13,23 @@ public class WizardNavigationBar extends HBox {
 
     public WizardNavigationBar() {
         super();
+        initHomeButton();
         initBackButton();
         initCreateAppButton();
         initNextButton();
         setAlignment(CENTER);
         setSpacing(10);
         setPadding(new Insets(10));
+    }
+
+    private void initHomeButton() {
+        Button homeButton = new Button();
+        FontIcon homeIcon = new FontIcon(FontAwesomeSolid.HOME);
+        homeIcon.setIconColor(javafx.scene.paint.Color.WHITE);
+        homeButton.setGraphic(homeIcon);
+        homeButton.setOnAction(event -> EventManager.publish("homeButtonClicked", null));
+        homeButton.getStyleClass().addAll("btn-primary", "btn-lg");
+        getChildren().add(homeButton);
     }
 
     private void initBackButton() {

@@ -7,6 +7,7 @@ module com.example.webappinitializer {
     requires org.kordamp.bootstrapfx.core;
     requires com.google.gson;
     requires org.jsoup;
+    requires org.kordamp.ikonli.fontawesome5;
 
     exports com.example.webappinitializer;
     exports com.example.webappinitializer.controller;

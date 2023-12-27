@@ -39,6 +39,7 @@ public class PrettierConfigurationForm extends VBox {
         ImageView logoImageView = new ImageView(logoImage);
         logoImageView.setFitHeight(100);
         logoImageView.setFitWidth(100);
+        logoImageView.setPreserveRatio(true);
         setPickOnBounds(true);
 
         trailingCommaComboBox.getItems().addAll("none", "es5", "all");

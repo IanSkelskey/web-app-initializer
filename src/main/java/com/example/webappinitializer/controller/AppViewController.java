@@ -18,6 +18,10 @@ public class AppViewController {
             homeView.setVisible(false);
             wizardView.setVisible(true);
         });
+        EventManager.subscribe("homeButtonClicked", (event) -> {
+            homeView.setVisible(true);
+            wizardView.setVisible(false);
+        });
     }
 
 }

@@ -22,10 +22,12 @@ public class TailwindConfigurationForm extends VBox {
         ImageView logoImageView = new ImageView(logoImage);
         logoImageView.setFitHeight(100);
         logoImageView.setFitWidth(100);
+        logoImageView.setPreserveRatio(true);
         setPickOnBounds(true);
 
         setAlignment(CENTER);
         setSpacing(20);
         setPadding(new Insets(20));
+        getChildren().add(logoImageView);
     }
 }
