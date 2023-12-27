@@ -57,14 +57,14 @@ public class ConfigurationSummaryView extends StepView {
     private void initCreateAppButton() {
         Button createAppButton = new Button("Create App");
         createAppButton.setOnAction(event -> EventManager.publish(EventType.CREATE_APP_BUTTON_CLICKED, null));
-        createAppButton.getStyleClass().addAll("btn-primary", "btn-lg");
+        createAppButton.getStyleClass().addAll("btn-success", "btn-lg");
         summary.getChildren().add(createAppButton);
     }
 
     private void initSaveConfigurationButton() {
         Button saveConfigurationButton = new Button("Save Configuration");
         saveConfigurationButton.setOnAction(event -> new ComingSoonAlert().show());
-        saveConfigurationButton.getStyleClass().addAll("btn-success", "btn-lg");
+        saveConfigurationButton.getStyleClass().addAll("btn-primary", "btn-lg");
         summary.getChildren().add(saveConfigurationButton);
     }
 

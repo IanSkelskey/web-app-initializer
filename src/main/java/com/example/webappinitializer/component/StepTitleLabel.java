@@ -8,6 +8,9 @@ import javafx.scene.paint.Color;
 
 import static javafx.geometry.Pos.CENTER;
 
+/**
+ * This is the label for the step title.
+ */
 public class StepTitleLabel extends Label {
 
     private static final Color BACKGROUND_COLOR = Color.web("#3379b7");
@@ -17,10 +20,17 @@ public class StepTitleLabel extends Label {
     private static final Color TEXT_COLOR = Color.WHITE;
     public static final int PADDING = 10;
 
+    /**
+     * Constructor
+     */
     public StepTitleLabel() {
         this("");
     }
 
+    /**
+     * Constructor
+     * @param text The text to display in the label.
+     */
     public StepTitleLabel(String text) {
         super(text);
         setAlignment(CENTER);

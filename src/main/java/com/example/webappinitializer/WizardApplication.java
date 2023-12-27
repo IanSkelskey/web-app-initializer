@@ -8,6 +8,9 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
 
+/**
+ * This is the main class for the application.
+ */
 public class WizardApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {

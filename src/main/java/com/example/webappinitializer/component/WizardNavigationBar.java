@@ -10,11 +10,17 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import static javafx.geometry.Pos.CENTER;
 
+/**
+ * This is the navigation bar for the wizard.
+ */
 public class WizardNavigationBar extends HBox {
 
     private int currentStep = 0;
     private int stepCount = 0;
 
+    /**
+     * Constructor
+     */
     public WizardNavigationBar() {
         super();
         EventManager.subscribe(EventType.STEP_CHANGED, (step) -> {
@@ -35,6 +41,9 @@ public class WizardNavigationBar extends HBox {
         setPadding(new Insets(10));
     }
 
+    /**
+     * Update the buttons based on the current step.
+     */
     private void updateButtons() {
         if (currentStep == 0) {
             hideBackButton();
@@ -48,6 +57,9 @@ public class WizardNavigationBar extends HBox {
         }
     }
 
+    /**
+     * Initialize the home button.
+     */
     private void initHomeButton() {
         Button homeButton = new Button();
         FontIcon homeIcon = new FontIcon(FontAwesomeSolid.HOME);
@@ -58,6 +70,9 @@ public class WizardNavigationBar extends HBox {
         getChildren().add(homeButton);
     }
 
+    /**
+     * Initialize the back button.
+     */
     private void initBackButton() {
         Button backButton = new Button("Back");
         backButton.setOnAction(event -> EventManager.publish(EventType.BACK_BUTTON_CLICKED, null));
@@ -65,6 +80,9 @@ public class WizardNavigationBar extends HBox {
         getChildren().add(backButton);
     }
 
+    /**
+     * Initialize the next button.
+     */
     private void initNextButton() {
         Button nextButton = new Button("Next");
         nextButton.setOnAction(event -> EventManager.publish(EventType.NEXT_BUTTON_CLICKED, null));
@@ -72,18 +90,30 @@ public class WizardNavigationBar extends HBox {
         getChildren().add(nextButton);
     }
 
+    /**
+     * Hide the back button.
+     */
     public void hideBackButton() {
         getChildren().get(1).setVisible(false);
     }
 
+    /**
+     * Show the back button.
+     */
     public void showBackButton() {
         getChildren().get(1).setVisible(true);
     }
 
+    /**
+     * Hide the next button.
+     */
     public void hideNextButton() {
         getChildren().get(2).setVisible(false);
     }
 
+    /**
+     * Show the next button.
+     */
     public void showNextButton() {
         getChildren().get(2).setVisible(true);
     }

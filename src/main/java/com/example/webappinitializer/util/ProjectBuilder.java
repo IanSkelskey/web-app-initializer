@@ -11,7 +11,24 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * ProjectBuilder
+ * <p>
+ *     This class is used to build a project based on the configuration.
+ * </p>
+ */
 public class ProjectBuilder {
+
+    /**
+     * Build a project based on the configuration.
+     * <p>
+     *     This method uses the {@link ProjectInitializer} class to create a React app and update the files.
+     *     <br>
+     *     This method uses the {@link BuildProgressAlert} class to display a progress alert.
+     * </p>
+     * @param config The project configuration.
+     * @param destinationDirectory The destination directory.
+     */
     public static void build(ProjectConfiguration config, File destinationDirectory) {
 
         String directoryName = config.getDirectoryName();

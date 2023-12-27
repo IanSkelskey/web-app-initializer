@@ -11,6 +11,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * The main view for the wizard.
+ * <p>
+ * This class is used to manage the wizard.
+ * It is used to add and remove steps, and to navigate between steps.
+ * </p>
+ */
 public class WizardView extends BorderPane {
 
     private final ProjectConfigurationManager projectConfigurationManager = new ProjectConfigurationManager();
@@ -30,6 +37,9 @@ public class WizardView extends BorderPane {
         Module.PRETTIER, prettierConfigurationView
     );
 
+    /**
+     * Constructor
+     */
     public WizardView() {
         super();
         ArrayList<StepView> introSteps = new ArrayList<>();
@@ -53,6 +63,16 @@ public class WizardView extends BorderPane {
     }
 
 
+    /**
+     * Handle the create app button clicked event.
+     * <p>
+     *     This method is called when the create app button is clicked.
+     *     It is used to create the project.
+     *     It calls the {@link ProjectConfigurationManager#buildProject(File)} method.
+     *     It passes the selected directory to the {@link ProjectConfigurationManager#buildProject(File)} method.
+     *     The selected directory is the directory where the project will be created.
+     * </p>
+     */
     public void handleCreateAppButtonClicked() {
         File selectedDirectory = ProjectInitializer.selectDirectory();
         projectConfigurationManager.buildProject(selectedDirectory);

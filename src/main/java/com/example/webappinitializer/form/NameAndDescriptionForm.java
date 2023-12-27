@@ -11,6 +11,9 @@ import javafx.scene.layout.VBox;
 
 import static javafx.geometry.Pos.CENTER;
 
+/**
+ * This is the form for entering the name and description.
+ */
 public class NameAndDescriptionForm extends VBox {
 
     private String directoryName;
@@ -18,6 +21,12 @@ public class NameAndDescriptionForm extends VBox {
     private final TextField shortNameTextField = new TextField(), fullNameTextField = new TextField();
     private TextArea descriptionTextArea = new TextArea();
 
+    /**
+     * Constructor
+     * This is the constructor of the name and description form.
+     * It sets up the form.
+     * It also sets up the event listeners for the text fields.
+     */
     public NameAndDescriptionForm() {
         shortNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             directoryName = newValue.toLowerCase().replaceAll("\\s+", "-");

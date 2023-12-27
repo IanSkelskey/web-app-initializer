@@ -10,10 +10,16 @@ import javafx.scene.layout.VBox;
 
 import static javafx.geometry.Pos.CENTER;
 
+/**
+ * This is the form for selecting modules.
+ */
 public class ModuleSelectionForm extends VBox {
 
     private CheckBox prettierCheckBox = new CheckBox("Prettier"), tailwindCheckBox = new CheckBox("Tailwind CSS"), framerMotionCheckBox = new CheckBox("Framer Motion");
 
+    /**
+     * Constructor
+     */
     public ModuleSelectionForm() {
         setAlignment(CENTER);
         setSpacing(20);
@@ -25,14 +31,27 @@ public class ModuleSelectionForm extends VBox {
         framerMotionCheckBox.getStyleClass().add("checkbox");
         getChildren().addAll(prettierCheckBox, tailwindCheckBox, framerMotionCheckBox);
     }
+
+    /**
+     * Handle the Prettier checkbox.
+     * @param actionEvent The action event.
+     */
     public void handlePrettierCheck(ActionEvent actionEvent) {
         handleModuleSelection(prettierCheckBox);
     }
 
+    /**
+     * Handle the Tailwind CSS checkbox.
+     * @param actionEvent The action event.
+     */
     public void handleTailwindCssCheck(ActionEvent actionEvent) {
         handleModuleSelection(tailwindCheckBox);
     }
 
+    /**
+     * Handle module selection.
+     * @param checkBox The checkbox that was selected.
+     */
     private void handleModuleSelection(CheckBox checkBox) {
         Module module;
         if (checkBox == prettierCheckBox) {

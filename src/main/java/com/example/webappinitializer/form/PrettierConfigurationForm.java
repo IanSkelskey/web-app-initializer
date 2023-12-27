@@ -16,6 +16,9 @@ import java.util.Objects;
 
 import static javafx.geometry.Pos.CENTER;
 
+/**
+ * This is the form for configuring Prettier.
+ */
 public class PrettierConfigurationForm extends VBox {
     private Image logoImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/prettier.png")));
     private CheckBox semiCheckBox = new CheckBox("Semicolons");
@@ -28,6 +31,12 @@ public class PrettierConfigurationForm extends VBox {
 
     private PrettierConfiguration configuration = new PrettierConfiguration();
 
+    /**
+     * Constructor
+     * This is the constructor of the Prettier configuration form.
+     * It sets up the form.
+     * It also sets up the event listeners for the form fields.
+     */
     public PrettierConfigurationForm() {
         tabWidthSpinner.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
             handlePrettierConfigChange();
@@ -67,6 +76,9 @@ public class PrettierConfigurationForm extends VBox {
 
     }
 
+    /**
+     * Handle the Prettier configuration change.
+     */
     public void handlePrettierConfigChange() {
         configuration = new PrettierConfiguration(
                 semiCheckBox.isSelected(),
