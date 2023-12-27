@@ -42,18 +42,18 @@ public class StepContainer extends StackPane {
     }
 
     public void goToNextStep() {
-        System.out.println("Going to next step. Current step is:  " + currentStep);
         if (currentStep < steps.size() - 1) {
             currentStep++;
             updateUI();
+            EventManager.publish(EventType.STEP_CHANGED, currentStep);
         }
     }
 
     public void goToPreviousStep() {
-        System.out.println("Going to previous step. Current step is:  " + currentStep);
         if (currentStep > 0) {
             currentStep--;
             updateUI();
+            EventManager.publish(EventType.STEP_CHANGED, currentStep);
         }
     }
 
@@ -68,5 +68,9 @@ public class StepContainer extends StackPane {
     private void updateUI() {
         hideInactiveSteps();
         showCurrentStep();
+    }
+
+    public StepView getCurrentStep() {
+        return steps.get(currentStep);
     }
 }

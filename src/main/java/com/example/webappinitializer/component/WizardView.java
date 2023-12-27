@@ -29,8 +29,7 @@ public class WizardView extends BorderPane {
         stepsContainer.addStep(nameAndDescriptionView);
         stepsContainer.addStep(moduleSelectionView);
         stepsContainer.addStep(configurationSummaryView);
-        EventManager.subscribe(EventType.BACK_BUTTON_CLICKED, (event) -> handleBackButtonClicked());
-        EventManager.subscribe(EventType.NEXT_BUTTON_CLICKED, (event) -> handleNextButtonClicked());
+
         EventManager.subscribe(EventType.CREATE_APP_BUTTON_CLICKED, (event) -> handleCreateAppButtonClicked());
         EventManager.subscribe(EventType.MODULE_SELECTED, (module) -> {
             if (module == Module.TAILWIND_CSS) {
@@ -73,16 +72,6 @@ public class WizardView extends BorderPane {
         updateButtons();
     }
 
-
-    private void handleBackButtonClicked() {
-        System.out.println("Back button clicked");
-        updateUI();
-    }
-
-    private void handleNextButtonClicked() {
-        System.out.println("Next button clicked");
-        updateUI();
-    }
 
     public void handleCreateAppButtonClicked() {
         File selectedDirectory = ProjectInitializer.selectDirectory();
