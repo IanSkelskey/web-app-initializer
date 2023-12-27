@@ -1,7 +1,5 @@
 package com.example.webappinitializer.component;
 
-import com.example.webappinitializer.config.PrettierConfiguration;
-import com.example.webappinitializer.config.ProjectConfiguration;
 import com.example.webappinitializer.config.ProjectConfigurationManager;
 import com.example.webappinitializer.util.EventManager;
 import com.example.webappinitializer.util.Modules;
@@ -52,10 +50,7 @@ public class WizardView extends BorderPane {
             } else if (module == Modules.PRETTIER) {
                 addStep(prettierConfigurationView);
             }
-            if (currentStep < steps.size() - 1) {
-                navigationBar.showNextButton();
-                navigationBar.hideCreateAppButton();
-            }
+            updateUI();
         });
 
         EventManager.subscribe("module-deselected", (module) -> {
@@ -64,16 +59,42 @@ public class WizardView extends BorderPane {
             } else if (module == Modules.PRETTIER) {
                 removeStep(prettierConfigurationView);
             }
-            if (currentStep == steps.size() - 1) {
-                navigationBar.hideNextButton();
-                navigationBar.showCreateAppButton();
-            }
+            updateUI();
         });
 
         setTop(navigationBar);
         setCenter(stepsContainer);
+        updateUI();
+    }
+
+    public void updateButtons() {
+        if (isOnFirstStep()) {
+            navigationBar.hideBackButton();
+        } else {
+            navigationBar.showBackButton();
+        }
+
+        if (isOnLastStep()) {
+            navigationBar.hideNextButton();
+            navigationBar.showCreateAppButton();
+        } else {
+            navigationBar.showNextButton();
+            navigationBar.hideCreateAppButton();
+        }
+    }
+
+    public void updateUI() {
+        updateButtons();
         hideInactiveSteps();
         showCurrentStep();
+    }
+
+    public boolean isOnFirstStep() {
+        return currentStep == 0;
+    }
+
+    public boolean isOnLastStep() {
+        return currentStep == steps.size() - 1;
     }
 
     public void addStep(StepView step) {
@@ -87,38 +108,19 @@ public class WizardView extends BorderPane {
     }
 
     private void handleBackButtonClicked() {
-        if (currentStep == 0) {
+        if (isOnFirstStep()) {
             return;
         }
         currentStep--;
-        if (currentStep == 0) {
-            navigationBar.hideBackButton();
-        }
-        if (currentStep < steps.size() - 1) {
-            navigationBar.showNextButton();
-            navigationBar.hideCreateAppButton();
-        }
-
-        hideInactiveSteps();
-        showCurrentStep();
-
+        updateUI();
     }
 
     private void handleNextButtonClicked() {
-        if (currentStep == steps.size() - 1) {
+        if (isOnLastStep()) {
             return;
         }
         currentStep++;
-        if (currentStep > 0) {
-            navigationBar.showBackButton();
-        }
-        if (currentStep == steps.size() - 1) {
-            navigationBar.hideNextButton();
-            navigationBar.showCreateAppButton();
-        }
-
-        hideInactiveSteps();
-        showCurrentStep();
+        updateUI();
     }
 
     public void handleCreateAppButtonClicked() {
