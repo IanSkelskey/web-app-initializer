@@ -1,5 +1,6 @@
 package com.example.webappinitializer.component;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -14,6 +15,11 @@ public class StepTitleLabel extends Label {
             new BackgroundFill(BACKGROUND_COLOR, null, null));
     private static final String STYLE_CLASS = "h3";
     private static final Color TEXT_COLOR = Color.WHITE;
+    public static final int PADDING = 10;
+
+    public StepTitleLabel() {
+        this("");
+    }
 
     public StepTitleLabel(String text) {
         super(text);
@@ -21,5 +27,6 @@ public class StepTitleLabel extends Label {
         getStyleClass().add(STYLE_CLASS);
         setBackground(BACKGROUND);
         setTextFill(TEXT_COLOR);
+        setPadding(new Insets(PADDING));
     }
 }

@@ -2,16 +2,19 @@ package com.example.webappinitializer.component;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 
-public class StepView extends VBox {
+public class StepView extends BorderPane {
     private final StringProperty name = new SimpleStringProperty(this, "name");
     private final StringProperty description = new SimpleStringProperty(this, "description");
 
+    private final int CONTENT_PADDING = 10;
+
     public StepView() {
-        StepTitleLabel titleLabel = new StepTitleLabel(getName());
+        StepTitleLabel titleLabel = new StepTitleLabel();
+        titleLabel.textProperty().bind(name);
         titleLabel.prefWidthProperty().bind(widthProperty());
-        getChildren().add(titleLabel);
+        setTop(titleLabel);
     }
 
     public String getName() {

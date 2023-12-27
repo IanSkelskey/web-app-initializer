@@ -1,79 +1,60 @@
-package com.example.webappinitializer.controller;
+package com.example.webappinitializer.component;
 
 import com.example.webappinitializer.config.PrettierConfiguration;
-import com.example.webappinitializer.util.EventManager;
 import com.example.webappinitializer.config.ProjectConfiguration;
+import com.example.webappinitializer.util.EventManager;
 import com.example.webappinitializer.util.Modules;
 import com.example.webappinitializer.util.ProjectInitializer;
-import com.example.webappinitializer.component.StepView;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import org.controlsfx.control.BreadCrumbBar;
-
 import java.io.File;
 import java.util.ArrayList;
 
-public class WizardViewController {
-
-    public StackPane stepsContainer;
+public class WizardView extends BorderPane {
 
     public ProjectConfiguration projectConfiguration = new ProjectConfiguration();
 
-    public Button backButton;
-    public Button createAppButton;
-    public Button nextButton;
-
-    public ArrayList<StepView> steps = new ArrayList<>();
-
     public int currentStep = 0;
-    public VBox homeView;
-    public StepView nameAndDescriptionView;
-    public StepView moduleSelectionView;
-    public StepView tailwindConfigurationView;
-    public StepView prettierConfigurationView;
+    private final StackPane stepsContainer = new StackPane();
+    private final ArrayList<StepView> steps = new ArrayList<>();
+    private final WizardNavigationBar navigationBar = new WizardNavigationBar();
 
-    @FXML
-    protected void initialize() {
-        EventManager.subscribe("getStartedButtonClicked", (event) -> {
-            homeView.setVisible(false);
-            steps.get(0).setVisible(true);
-            nextButton.setVisible(true);
-        });
-
+    WizardView() {
+        super();
+        addStep(new NameAndDescriptionView());
+        addStep(new ModuleSelectionView());
+        EventManager.subscribe("backButtonClicked", (event) -> handleBackButtonClicked());
+        EventManager.subscribe("nextButtonClicked", (event) -> handleNextButtonClicked());
+        EventManager.subscribe("createAppButtonClicked", (event) -> handleCreateAppButtonClicked());
         EventManager.subscribe("module-selected", (module) -> {
             if (module == Modules.TAILWIND_CSS) {
                 projectConfiguration.addModule(Modules.TAILWIND_CSS);
-                steps.add(tailwindConfigurationView);
+                steps.add(new TailwindConfigurationView());
             } else if (module == Modules.PRETTIER) {
                 projectConfiguration.addModule(Modules.PRETTIER);
-                steps.add(prettierConfigurationView);
+                steps.add(new PrettierConfigurationView());
             } else if (module == Modules.FRAMER_MOTION) {
                 projectConfiguration.addModule(Modules.FRAMER_MOTION);
             }
             if (currentStep < steps.size() - 1) {
-                nextButton.setVisible(true);
-                createAppButton.setVisible(false);
+                navigationBar.showNextButton();
+                navigationBar.hideCreateAppButton();
             }
         });
 
         EventManager.subscribe("module-deselected", (module) -> {
             if (module == Modules.TAILWIND_CSS) {
                 projectConfiguration.removeModule(Modules.TAILWIND_CSS);
-                steps.remove(tailwindConfigurationView);
+                steps.remove(new TailwindConfigurationView());
             } else if (module == Modules.PRETTIER) {
                 projectConfiguration.removeModule(Modules.PRETTIER);
-                steps.remove(prettierConfigurationView);
+                steps.remove(new PrettierConfigurationView());
             } else if (module == Modules.FRAMER_MOTION) {
                 projectConfiguration.removeModule(Modules.FRAMER_MOTION);
             }
             if (currentStep == steps.size() - 1) {
-                nextButton.setVisible(false);
-                createAppButton.setVisible(true);
+                navigationBar.hideNextButton();
+                navigationBar.showCreateAppButton();
             }
         });
 
@@ -97,49 +78,56 @@ public class WizardViewController {
             projectConfiguration.setModuleConfiguration(Modules.PRETTIER, (PrettierConfiguration) config);
         });
 
-        steps.add(nameAndDescriptionView);
-        steps.add(moduleSelectionView);
-
-        createAppButton.getStyleClass().addAll("btn-lg", "btn-primary");
+        setTop(navigationBar);
+        setCenter(stepsContainer);
     }
 
-    public void handleNextButtonAction(ActionEvent actionEvent) {
-        if (currentStep == steps.size() - 1) {
-            return;
-        }
-        steps.get(currentStep).setVisible(false);
-        steps.get(currentStep + 1).setVisible(true);
-        currentStep++;
-        if (currentStep == steps.size() - 1) {
-            nextButton.setVisible(false);
-            createAppButton.setVisible(true);
-        } else {
-            nextButton.setVisible(true);
-            createAppButton.setVisible(false);
-        }
-        if (currentStep > 0) {
-            backButton.setVisible(true);
-        }
-
+    public void addStep(StepView step) {
+        steps.add(step);
+        stepsContainer.getChildren().add(step);
     }
 
-    public void handleBackButtonAction(ActionEvent actionEvent) {
+    public void removeStep(StepView step) {
+        steps.remove(step);
+        stepsContainer.getChildren().remove(step);
+    }
+
+    private void handleBackButtonClicked() {
         if (currentStep == 0) {
             return;
         }
         steps.get(currentStep).setVisible(false);
         steps.get(currentStep - 1).setVisible(true);
         currentStep--;
-
+        if (currentStep == 0) {
+            navigationBar.hideBackButton();
+        }
         if (currentStep < steps.size() - 1) {
-            nextButton.setVisible(true);
-            createAppButton.setVisible(false);
+            navigationBar.showNextButton();
+            navigationBar.hideCreateAppButton();
         }
 
     }
 
-    public void onCreateAppButtonClick(ActionEvent actionEvent) {
+    private void handleNextButtonClicked() {
+        if (currentStep == steps.size() - 1) {
+            return;
+        }
+        steps.get(currentStep).setVisible(false);
+        steps.get(currentStep + 1).setVisible(true);
+        currentStep++;
+        if (currentStep > 0) {
+            navigationBar.showBackButton();
+        }
+        if (currentStep == steps.size() - 1) {
+            navigationBar.hideNextButton();
+            navigationBar.showCreateAppButton();
+        }
+    }
+
+    public void handleCreateAppButtonClicked() {
         File selectedDirectory = ProjectInitializer.selectDirectory();
         projectConfiguration.build(selectedDirectory);
     }
+
 }
